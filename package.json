@@ -27,7 +27,7 @@
     "autoprefixer": "10.4.14",
     "contentstack": "^3.20.1",
     "eslint": "9.0.0",
-    "eslint-config-next": "14.1.0",
+    "eslint-config-next": "14.2.5",
     "flag-icons": "^7.2.0",
     "html-react-parser": "^3.0.16",
     "lodash": "^4.17.21",
@@ -55,7 +55,7 @@
     "@typescript-eslint/eslint-plugin": "^5.59.2",
     "autoprefixer": "^10.0.1",
     "eslint": "^9.0.0",
-    "eslint-config-next": "14.1.0",
+    "eslint-config-next": "14.2.5",
     "postcss": "^8.4.31",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
