@@ -15,7 +15,7 @@
     "@contentstack/live-preview-utils": "^2.0.3",
     "@contentstack/management": "^1.15.3",
     "@contentstack/utils": "^1.2.0",
-    "@headlessui/react": "1.7.14",
+    "@headlessui/react": "2.1.2",
     "@headlessui/tailwindcss": "^0.2.0",
     "@heroicons/react": "^2.1.1",
     "@tailwindcss/aspect-ratio": "^0.4.2",
