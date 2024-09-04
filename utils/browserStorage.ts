@@ -17,7 +17,7 @@ export const getJsonCookie = (cname: string) => {
             const jsonBVal = JSON.parse(cookieVal)
             return jsonBVal
         } catch (err: any) {
-            console.error(`Error parsing cookie value ${cname}:`, err)
+            console.error('Error parsing cookie value: ' + cname)
         }
     }
     return null
