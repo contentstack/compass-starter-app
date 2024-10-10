@@ -11,9 +11,10 @@ import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/20/solid'
 import { Carousel, CTAGroup, Link } from '@/components'
 import { App } from '@/types'
 import useRouterHook from '@/hooks/useRouterHook'
-import { getJsonCookie, isCookieExist } from '@/utils'
+import { getJsonCookie, getPersonalizeAttribute, isCookieExist } from '@/utils'
 import { localeCookieName } from '@/config'
 import { Locale } from '@/types/common'
+import { usePersonalization } from '@/context'
 import { LanguageSelector } from '../LanguageSelector'
 
 function Header (props: App.Header) {
@@ -28,7 +29,13 @@ function Header (props: App.Header) {
     const [, setOpen] = useState(false)
     const [locales, setLocales] = useState<Locale[] | []>([])
     const {path} = useRouterHook()
-    const isHome:boolean = (path === '/') ? true : false 
+    const isHome:boolean = (path === '/' || path === process.env.CONTENTSTACK_AB_LANDING_PAGE_PATH) ? true : false 
+
+    const { personalizationSDK, personalizeConfig } = usePersonalization()
+
+    const audiences = personalizeConfig?.audiences
+
+    const router = useRouterHook()
 
     useEffect(() => {
         setData(props)
@@ -74,6 +81,14 @@ function Header (props: App.Header) {
 
     const resetMobileNav = () => {
         setOpen(false)
+    }
+
+    const setAttribute = async (region: string, mobile=false) => {
+        const criteria = region.toLowerCase()
+        const attributes = getPersonalizeAttribute(audiences, criteria)
+        await personalizationSDK.set({...attributes})
+
+        if(mobile) resetMobileNav()
     }
 
 
@@ -161,9 +176,10 @@ function Header (props: App.Header) {
                                                             className='font-semibold text-gray-900 text-m mb-4'
                                                         >{linkData.text}
                                                         </p>}
-                                                        <Link
-                                                            url={linkData?.link?.[0]?.url}
+                                                        <a
+                                                            href={'/' + router.locale + linkData?.link?.[0]?.url}
                                                             className='flex flex-col outline-none'
+                                                            onClick={() => setAttribute(String(linkData.text))}
                                                         >
                                                             {linkData?.thumbnail?.url && <img
                                                                 src={linkData.thumbnail.url.indexOf('?') > -1 ? `${linkData.thumbnail.url}&auto=webp&format=pjpg` : `${linkData.thumbnail.url}?auto=webp&format=pjpg`} className='object-cover h-40'
@@ -174,7 +190,7 @@ function Header (props: App.Header) {
                                                             >
                                                                 {linkData?.link_text && linkData?.link_text} <ChevronRightIcon className='h-4 my-auto inline-block mb-1' />
                                                             </span>}
-                                                        </Link>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             ))}
@@ -300,7 +316,7 @@ function Header (props: App.Header) {
                                                         >
                                                             {sect?.links?.map((subitem) => (
                                                                 subitem?.text && <li key={subitem.text} className=''>
-                                                                    <div onClick={resetMobileNav}>
+                                                                    <div onClick={() => setAttribute(String(subitem.text), true)}>
                                                                         <Link url={subitem.link} className='-m-2 block p-2 pl-10 text-[#253143] text-[16.071px] text-justify font-normal font-montserrat leading-normal hover:underline'>
                                                                             {subitem.text}
                                                                         </Link>

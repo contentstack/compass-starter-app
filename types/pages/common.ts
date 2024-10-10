@@ -30,6 +30,7 @@ export interface pageBlocks {
   
 export type pageRenderProps = {
     components:pageBlocks[];
+    isABEnabled?:boolean;
   }
 export interface Article extends PageEntry,ArticleCover {
   content?:string

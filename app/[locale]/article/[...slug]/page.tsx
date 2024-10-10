@@ -7,21 +7,37 @@ import { Page } from '@/types'
 import { ArticleCover, NotFoundComponent, PageWrapper, RelatedArticles, RelatedLinks } from '@/components'
 import { ImageCardItem } from '@/types/components'
 import { onEntryChange } from '@/config'
-import { isDataInLiveEdit } from '@/utils'
+import { getPersonalizeAttribute, isDataInLiveEdit, removeSpecialChar } from '@/utils'
 import useRouterHook from '@/hooks/useRouterHook'
 import { setDataForChromeExtension } from '@/utils'
+import { usePersonalization } from '@/context'
 
 
 export default function Article () {
+    const { personalizationSDK, personalizeConfig } = usePersonalization()
     const [data, setData] = useState<Page.ArticlePage['entry'] | null>(null)
     const [loading, setLoading] = useState<boolean>(true)
     const [articles, setArticles] = useState<Page.ArticlePage['articles'] | null>(null)
     const [relatedLinks, setRelatedLinks] = useState<Page.ArticleListingPage['entry'][] | []>([])
-    const {path, locale} = useRouterHook()
+    const { path, locale } = useRouterHook()
+
+    const taxonomy_path = personalizeConfig?.taxonomy_path
+
+    useEffect(() => {
+        const setAttribute = async () => {
+            const audiences = personalizeConfig?.audiences
+            const criteria = (taxonomy_path?.toLowerCase() === data?.taxonomies?.[0]?.taxonomy_uid.toLowerCase()) ? data?.taxonomies?.[0]?.term_uid.toLowerCase() : data?.taxonomies?.[1]?.term_uid.toLowerCase()
+            const attributes = getPersonalizeAttribute(audiences, removeSpecialChar(String(criteria)))
+            await personalizationSDK.set({ ...attributes })
+        }
+
+        if(personalizeConfig) setAttribute()
+
+    }, [personalizeConfig])
 
     const fetchData = async () => {
         try {
-            const entryData: Page.ArticlePage['entry'] = await getArticle(path, locale)
+            const entryData = await getArticle(path, locale) as Page.ArticlePage['entry']
             setData(entryData)
             setDataForChromeExtension({ entryUid: entryData?.uid || '', contenttype: 'article', locale: locale })
             if (!entryData && !isNull(entryData)) {
@@ -36,19 +52,19 @@ export default function Article () {
         try {
             if (data && data?.taxonomies?.length > 0) {
                 if (show_related_links) {
-                    const listingData: Page.ArticleListingPage['entry'][] = await getArticleListingPageByTaxonomy(locale, data?.taxonomies)
+                    const listingData = await getArticleListingPageByTaxonomy(locale, data?.taxonomies) as Page.ArticleListingPage['entry'][]
                     listingData && setRelatedLinks(listingData)
                 }
                 if (show_related_articles) {
-                    let articlesData: Page.ArticlePage['articles'] = await getArticles(locale, data?.taxonomies, 7)
+                    let articlesData = await getArticles(locale, data?.taxonomies, 7) as Page.ArticlePage['articles']
                     articlesData = articlesData?.filter((article) => article.uid !== data?.uid)
                     articlesData && setArticles(articlesData)
-                } 
+                }
             } else {
                 setRelatedLinks([])
                 setArticles([])
             }
-            
+
         } catch (err) {
             console.error('🚀 ~ article.tsx ~ fetchArticles ~ err:', err)
             setArticles([])

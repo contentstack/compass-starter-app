@@ -7,6 +7,7 @@ import 'slick-carousel/slick/slick-theme.css'
 import '../globals.css'
 import '@/styles/style.css'
 import '/node_modules/flag-icons/css/flag-icons.min.css'
+import {PersonalizationProvider} from '@/context'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,9 +25,11 @@ export default async function RootLayout ({
     return (
         <html lang='en'>
             <body className={inter.className}>
-                <SingleCol>
-                    {children}
-                </SingleCol>
+                <PersonalizationProvider>
+                    <SingleCol>
+                        {children}
+                    </SingleCol>
+                </PersonalizationProvider>
             </body>
         </html>
     )

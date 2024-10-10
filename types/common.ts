@@ -1,3 +1,4 @@
+import { EntryEmbedable } from '@contentstack/utils'
 import { related_articles, related_links } from './components'
 import { Taxonomy } from './pages/common'
 
@@ -32,7 +33,7 @@ export interface CommonSystemInfo {
   }
   tags?: string[]
   title?: string
-  uid?: string
+  uid:string
   show_related_links?: boolean
   region?:string[]
   topics?:string[]
@@ -43,10 +44,14 @@ export interface CommonSystemInfo {
   updated_by?: string
 }
 
-export type PageEntry = Entry & {
+export type PageEntry = EmbedEntry & {
   // $?: MappedPreview<PageEntry>
   url: string
   taxonomies: Taxonomy[]
+}
+
+export interface EmbedEntry extends Entry, EntryEmbedable {
+  embedableArray?: EntryEmbedable[]
 }
 
 export type Entry = CommonSystemInfo & {
@@ -74,7 +79,6 @@ export type Entry = CommonSystemInfo & {
     },
     shared_org_uid: string[]
     tfa_status: string
-    uid: string
     updated_at: string
     username: string
   }
@@ -103,3 +107,22 @@ export type Locale = {
 }
 
 export type localeItems = Locale[]
+
+export type PersonalizeConfig = EmbedEntry & {
+  audiences: Audiences
+  taxonomy_path: string
+}
+
+export type Audiences = {
+  group?: Group[]
+}
+
+export type Group = {
+  name?: string
+  attributes?: Attributes[]
+}
+
+export type Attributes = {
+  key?: string
+  value?: string
+}

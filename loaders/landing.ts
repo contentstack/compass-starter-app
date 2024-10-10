@@ -1,7 +1,8 @@
 import { getEntryByUrl } from '@/services'
+import { Page } from '@/types'
 import { imageCardsReferenceIncludes, teaserReferenceIncludes, textAndImageReferenceIncludes, textJSONRtePaths } from './loaders.helper'
 
-export const getLandingPage = (cmsUrlPath: string | undefined, locale: string | undefined) => {
+export const getLandingPage = (cmsUrlPath: string | undefined, locale: string) => {
     const refUids = [
         ...textAndImageReferenceIncludes,
         ...teaserReferenceIncludes,
@@ -11,5 +12,5 @@ export const getLandingPage = (cmsUrlPath: string | undefined, locale: string | 
         ...textJSONRtePaths
     ]
     
-    return getEntryByUrl('landing_page',locale, `${cmsUrlPath}`, refUids, jsonRtePaths)  
+    return getEntryByUrl<Page.LandingPage['entry']>('landing_page',locale, `${cmsUrlPath}`, refUids, jsonRtePaths)  
 }

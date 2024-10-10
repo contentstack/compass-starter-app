@@ -11,15 +11,19 @@ export const isFooterValid = (footer:App.Footer) => {
     return footer && Object.keys(footer)?.length > 0
 }
 
-export const Footer: React.FC<App.Footer> = ({ sections, copyright_info, built_by, logo, $ }: App.Footer) => {
+export const Footer: React.FC<App.Footer> = (props: App.Footer) => {
+    const { sections, copyright_info, built_by, logo, $ } = props
 
     // ? Method to render the Region Links column
     const renderFooterLinks = () => {
         const chunkedArray = []
-        for (let i = 0; i < sections!.length; i += 2) {
-            const chunk = sections?.slice(i, i + 2)
-            chunkedArray.push(chunk)
+        if (sections && sections?.length) {
+            for (let i = 0; i < sections.length; i += 2) {
+                const chunk = sections?.slice(i, i + 2)
+                chunkedArray.push(chunk)
+            }
         }
+       
 
         const renderLinks = (links: FooterLink[]) => {
             return links?.map((link: FooterLink, index: number) => {
@@ -105,7 +109,7 @@ export const Footer: React.FC<App.Footer> = ({ sections, copyright_info, built_b
             <h2 id='footer-heading' data-id='h2-text' className='sr-only'>
                 Footer
             </h2>
-            {isFooterValid({ sections, copyright_info, built_by, logo, $ }) && <div className='mx-auto max-w-7xl px-6 py-16 sm:py-24 lg:px-8 lg:py-24'>
+            {isFooterValid(props) && <div className='mx-auto max-w-7xl px-6 py-16 sm:py-24 lg:px-8 lg:py-24'>
                 <div className='xl:grid xl:grid-cols-3 xl:gap-8'>
                     {
                         logo?.title

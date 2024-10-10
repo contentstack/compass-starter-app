@@ -2,13 +2,13 @@ import { CardCollection, FeaturedArticles, Teaser, Text, TextAndImage } from '@/
 import { Page } from '@/types'
 
 
-function RenderComponents ({components}: Page.pageRenderProps) {
+function RenderComponents ({components, isABEnabled = false}: Page.pageRenderProps) {
 
     return (<>
         {components?.map((
             component, key: number) => {
             if (component.teaser) {
-                return <Teaser id={`teaser-${key}`} key={`component-${key}`} {...component.teaser} />
+                return <Teaser id={`teaser-${key}`} key={`component-${key}`} {...component.teaser} isABEnabled={isABEnabled}/>
             }
             if (component.text_and_image) {
                 return <TextAndImage id={`text-image-${key}`}  key={`component-${key}`} {...component.text_and_image} />

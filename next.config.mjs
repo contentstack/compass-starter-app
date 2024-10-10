@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
     reactStrictMode: true,
     env: { // available at build time
@@ -17,8 +18,14 @@ const nextConfig = {
         LOCALE_COOKIE_NAME: process.env.LOCALE_COOKIE_NAME || '', // set locale cookie name
         DEFAULT_LOCALE: process.env.DEFAULT_LOCALE || 'en',
         LOCALSTORAGE_WEBCONFIG_KEY: process.env.LOCALSTORAGE_WEBCONFIG_KEY || 'webconfig',
-        LOCALSTORAGE_WEBCONFIG_TTL: process.env.LOCALSTORAGE_WEBCONFIG_TTL || '86400' // 1 day in seconds
+        LOCALSTORAGE_WEBCONFIG_TTL: process.env.LOCALSTORAGE_WEBCONFIG_TTL || '86400', // 1 day in seconds
+
+        CONTENTSTACK_PERSONALIZE_EDGE_API_URL: process.env.CONTENTSTACK_PERSONALIZE_EDGE_API_URL,
+        CONTENTSTACK_PERSONALIZE_PROJECT_UID: process.env.CONTENTSTACK_PERSONALIZE_PROJECT_UID,
+        CONTENTSTACK_AB_EXPERIENCE_ID: process.env.CONTENTSTACK_AB_EXPERIENCE_ID || '1',
+        CONTENTSTACK_AB_LANDING_PAGE_PATH: process.env.CONTENTSTACK_AB_LANDING_PAGE_PATH,
+        CONTENTSTACK_AB_PRIMARY_EVENT: process.env.CONTENTSTACK_AB_PRIMARY_EVENT || 'Clicked'
     }
 }
 
-module.exports = nextConfig
+export default nextConfig
