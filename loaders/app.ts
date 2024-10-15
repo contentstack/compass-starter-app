@@ -1,7 +1,7 @@
 import { getEntries } from '@/services'
 import { footerJsonRtePathIncludes,footerReferenceIncludes, navigationReferenceIncludes } from './loaders.helper'
 
-export const getAppConfigData = async (locale:string|undefined) => {
+export const getAppConfigData = async (locale:string) => {
     const refUids = [
         ...navigationReferenceIncludes,
         ...footerReferenceIncludes

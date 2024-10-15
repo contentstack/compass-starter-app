@@ -1,7 +1,8 @@
 import { getEntryByUrl } from '@/services'
-import { featuredArticlesReferenceIncludes, imageCardsReferenceIncludes, teaserReferenceIncludes, textAndImageReferenceIncludes } from './loaders.helper'
+import { Page } from '@/types'
+import { featuredArticlesReferenceIncludes, imageCardsReferenceIncludes, teaserReferenceIncludes, textAndImageReferenceIncludes, textJSONRtePaths } from './loaders.helper'
 
-export const getHomePage = ( cmsUrlPath: string | undefined, locale: string | undefined) => {
+export const getHomePage = ( cmsUrlPath: string, locale: string) => {
     const refUids = [
         ...textAndImageReferenceIncludes,
         ...teaserReferenceIncludes,
@@ -9,5 +10,9 @@ export const getHomePage = ( cmsUrlPath: string | undefined, locale: string | un
         ...featuredArticlesReferenceIncludes 
     ]
 
-    return getEntryByUrl('home_page',locale, cmsUrlPath , refUids, [])
+    const jsonRTEPaths = [
+        ...textJSONRtePaths
+    ]
+
+    return getEntryByUrl<Page.Homepage['entry']>('home_page',locale, cmsUrlPath , refUids, jsonRTEPaths)
 }

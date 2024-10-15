@@ -1,10 +1,14 @@
+import Personalize from '@contentstack/personalize-edge-sdk'
+
+import { useRouter } from 'next/navigation'
 import { buildLinkUrl } from '@/utils'
 import { LinkComponent as LinkComponentType } from '@/types/components'
 import { useLocaleContext } from '@/context'
 
 const LinkComponent: React.FC<LinkComponentType> = (props: LinkComponentType) => {
-    const { url, children, className, target,  $ } = props
+    const { url, children, className, target, isABEnabled,  $ } = props
     const elemattr = {className, target: target || '_self', ['data-title']: props?.['data-title'], ...$ }
+    const router = useRouter()
 
     const { currentLocale } = useLocaleContext()
     
@@ -16,8 +20,16 @@ const LinkComponent: React.FC<LinkComponentType> = (props: LinkComponentType) =>
     }
     
     const href = buildLinkUrl(internal_link, external_link, currentLocale)
-    
-    const LinkWrapper = () => <a data-id='link-href' href={`${href}`} {...elemattr}>
+
+    const onClickHandler = (e: { preventDefault: () => void }) => {
+        if(isABEnabled){ 
+            e.preventDefault()
+            Personalize.triggerEvent(process.env.CONTENTSTACK_AB_PRIMARY_EVENT??'Clicked')
+            if(href) router.push(href)
+        }
+    }
+            
+    const LinkWrapper = () => <a onClick={onClickHandler} data-id='link-href' href={`${href}`} {...elemattr}>
         {children}
     </a>
 
@@ -26,7 +38,7 @@ const LinkComponent: React.FC<LinkComponentType> = (props: LinkComponentType) =>
         elemattr.className = className + '!cursor-default hover:!no-underline hover:!border-transparent'
 
         return(
-            <span data-id='link-placeholder' {...elemattr}>
+            <span onClick={onClickHandler} data-id='link-placeholder' {...elemattr}>
                 {children}
             </span>
         )

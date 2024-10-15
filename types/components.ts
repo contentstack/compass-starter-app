@@ -35,6 +35,7 @@ export interface LinkComponent extends pageLink {
   className?: string;
   target?: string | undefined;
   'data-title'?:string;
+  isABEnabled?: boolean
 }
 
 export interface CtaCollection {
@@ -56,6 +57,18 @@ export interface Image {
   $? : MappedPreview<Image>;
 }
 export interface ImageComponent extends Image {
+  className?: string;
+  addDataCslp?: boolean;
+}
+
+export interface Video {
+  id?: string | number;
+  video?: Asset;
+  video_alt_text?: string;
+  $? : MappedPreview<Video>;
+}
+
+export interface VideoComponent extends Video {
   className?: string;
   addDataCslp?: boolean;
 }
@@ -89,9 +102,11 @@ export interface Teaser {
   content?: string;
   cta?: Cta[];
   image?: Image[];
+  video?: Video;
   styles?: {
     text_align?: string;
   }
+  isABEnabled?: boolean;
 }
 
 export interface FeaturedArticles {

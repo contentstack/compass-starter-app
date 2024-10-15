@@ -6,13 +6,17 @@ import {  Page } from '@/types'
 import { CardCollection, NoArticles, NotFoundComponent, PageWrapper, Pagination } from '@/components'
 import { RenderComponents } from '@/components'
 import { ImageCardItem } from '@/types/components'
-import { isDataInLiveEdit } from '@/utils'
+import { getPersonalizeAttribute, isDataInLiveEdit, removeSpecialChar } from '@/utils'
 import { onEntryChange } from '@/config'
 import useRouterHook from '@/hooks/useRouterHook'
 import { setDataForChromeExtension } from '@/utils'
+import { usePersonalization } from '@/context'
 
 
 export default function Article () {
+
+    const { personalizationSDK, personalizeConfig } = usePersonalization()
+
     const [data, setData] = useState<Page.ArticleListingPage['entry'] | null>(null)
     const [articles, setArticles] = useState<Page.ArticleListingPage['articles'] | null>(null)
     const noArticles = articles && articles?.length > 0 ? false : true
@@ -41,16 +45,16 @@ export default function Article () {
 
     const fetchData = async () => {
         try{
-            const res = await getArticleListingPage(path, locale)
+            const res = await getArticleListingPage(path, locale) as Page.ArticleListingPage['entry']
             setData(res)
-            setDataForChromeExtension({ entryUid: res?.uid, contenttype: 'article_listing_page', locale: locale })
+            setDataForChromeExtension({ entryUid: res?.uid || '', contenttype: 'article_listing_page', locale: locale })
         } catch(error) {
             console.error('Error while fetching ArticleListingPage:', error)
         }
     }
     const fetchArticles = async () => {
         try{
-            const articleCollection = await getArticlesByTaxonomy(path, locale)
+            const articleCollection = await getArticlesByTaxonomy(path, locale) as Page.ArticlePage['articles']
             setArticles(articleCollection)
         } catch(error) {
             console.error('Error while fetching Articles:', error)
@@ -62,6 +66,18 @@ export default function Article () {
         onEntryChange(fetchData)
         fetchArticles()
     }, [])
+
+    useEffect(() => {
+        const setAttribute = async () => {
+            const audiences = personalizeConfig?.audiences
+            const criteria = path.substring(path.lastIndexOf('/')+1,path.length)
+            const attributes = getPersonalizeAttribute(audiences, removeSpecialChar(String(criteria)))
+            await personalizationSDK.set({...attributes})
+        }
+
+        if(personalizeConfig) setAttribute()
+    }
+    , [personalizeConfig])
 
     useEffect(() => {
         const cardsData: ImageCardItem[] | [] =  articles?.map((article) => {

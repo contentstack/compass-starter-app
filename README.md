@@ -38,4 +38,6 @@ We have created an in-depth tutorial on how you can create a starter website usi
 
 - [Contentstack documentation](https://www.contentstack.com/docs/)
 - [Region support documentation](https://www.contentstack.com/docs/developers/selecting-region-in-contentstack-starter-apps)
+- [Contentstack Typescript SDK](https://www.contentstack.com/docs/developers/sdks/content-delivery-sdk/typescript/reference)
+- [Contentstack Personalize SDK](https://www.contentstack.com/docs/personalize)
 - [Next.js](https://learnnextjs.com/)

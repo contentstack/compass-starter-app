@@ -40,16 +40,16 @@ export default function ArticleListing () {
 
     const fetchData = async () => {
         try{
-            const res = await getArticleListingPage(path, locale)
+            const res = await getArticleListingPage(path, locale) as Page.ArticleListingPage['entry']
             setData(res)
-            setDataForChromeExtension({ entryUid: res?.uid, contenttype: 'article_listing_page', locale: locale })
+            setDataForChromeExtension({ entryUid: res?.uid || '', contenttype: 'article_listing_page', locale: locale })
         } catch(error) {
             console.error('Error while fetching ArticleListingPage:', error)
         }
     }
     const fetchArticles = async () => {
         try{
-            const articleCollection = await getArticles(locale)
+            const articleCollection = await getArticles(locale) as Page.Article['articles'][]
             setArticles(articleCollection)
         } catch(error) {
             console.error('Error while fetching Articles:', error)

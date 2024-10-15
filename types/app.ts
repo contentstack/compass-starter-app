@@ -1,12 +1,10 @@
 import type { AppProps } from 'next/app'
-import { Asset, Entry, localeItems, MappedPreview } from './common'
+import { Asset, EmbedEntry, Entry, localeItems, MappedPreview } from './common'
 import { CallToAction, InternalLink } from './components'
 
 export interface Header extends Entry {
   $?: MappedPreview<Header>;
   logo?: Asset;
-  // logo_desktop?: Asset;
-  // site_url?: string;
   scrolled?: boolean;
   main_navigation?: Navigation[];
   items?: items[];
@@ -60,7 +58,7 @@ export interface Navigation extends Entry {
   }[]
   // $?: MappedPreview<Header>;
 }
-export interface Footer extends Entry {
+export interface Footer extends EmbedEntry {
   sections?:FooterSection[];
   copyright_info?: string;
   built_by?: string;

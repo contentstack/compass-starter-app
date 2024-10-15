@@ -1,11 +1,12 @@
-import Contentstack from 'contentstack'
+import Contentstack from '@contentstack/delivery-sdk'
 import ContentstackLivePreview from '@contentstack/live-preview-utils'
-
-export const Stack = (process.env.CONTENTSTACK_API_KEY && process.env.CONTENTSTACK_DELIVERY_TOKEN) && Contentstack.Stack({
-    api_key: process.env.CONTENTSTACK_API_KEY,
-    delivery_token: process.env.CONTENTSTACK_DELIVERY_TOKEN,
-    environment: process.env.CONTENTSTACK_ENVIRONMENT,
+// import { IStackSdk } from '@contentstack/live-preview-utils/dist/src/utils/types' 
+export const Stack = Contentstack.stack({
+    apiKey: process.env.CONTENTSTACK_API_KEY as string,
+    deliveryToken: process.env.CONTENTSTACK_DELIVERY_TOKEN as string,
+    environment: process.env.CONTENTSTACK_ENVIRONMENT as string,
     branch: process.env.CONTENTSTACK_BRANCH,
+    host: process.env.CONTENTSTACK_HOST,
     live_preview: {
         enable: true,
         host: process.env.CONTENTSTACK_PREVIEW_HOST,
@@ -13,7 +14,6 @@ export const Stack = (process.env.CONTENTSTACK_API_KEY && process.env.CONTENTSTA
     }
 })
 
-process.env.CONTENTSTACK_HOST && Stack.setHost(process.env.CONTENTSTACK_HOST)
 
 ContentstackLivePreview.init({
     clientUrlParams: { host: process.env.CONTENTSTACK_APP_HOST },
@@ -22,7 +22,7 @@ ContentstackLivePreview.init({
         environment: process.env.CONTENTSTACK_ENVIRONMENT,
         branch: process.env.CONTENTSTACK_BRANCH
     },
-    stackSdk: Stack,
+    stackSdk: Stack.config as any, // once type definition is availble from SDK any need to be replaced with IStackSdk
     ssr: false
 })
 

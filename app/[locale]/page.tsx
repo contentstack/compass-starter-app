@@ -6,8 +6,7 @@ import { Page } from '@/types'
 import { NotFoundComponent, PageWrapper } from '@/components'
 import { onEntryChange } from '@/config'
 import useRouterHook from '@/hooks/useRouterHook'
-import { isDataInLiveEdit } from '@/utils'
-import { setDataForChromeExtension } from '@/utils'
+import { isDataInLiveEdit, setDataForChromeExtension } from '@/utils'
 
 export default function Home () {
 
@@ -17,9 +16,9 @@ export default function Home () {
 
     const fetchData = async () => {
         try {
-            const res = await getHomePage(path, locale)
+            const res = await getHomePage(path, locale) as Page.LandingPage['entry']
             setData(res)
-            setDataForChromeExtension({ entryUid: res?.uid, contenttype: 'home_page', locale: locale })
+            setDataForChromeExtension({ entryUid: res?.uid ?? '', contenttype: 'home_page', locale: locale })
             if (!res) {
                 throw '404'
             }

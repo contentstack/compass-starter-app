@@ -81,7 +81,7 @@ const LanguageSelector: FunctionComponent<App.LangaugeSelector> = (props: App.La
                     className={`inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold text-gray-900 hover:bg-gray-50 border border-transparent hover:border-gray-300 ${(!Opac) ? 'bg-opacity-100' : 'bg-opacity-20'}`}
                 >
                     <span className={`fi fi-${(currentLocale === 'en') ? 'us' : currentLocale} mt-1`}></span>
-                    <ChevronDownIcon className='-mr-1 h-5 w-5 text-gray-900' aria-hidden='true' />
+                    <ChevronDownIcon className='h-5 w-5 flex-none text-gray-900  ui-open:transform ui-open:rotate-180' aria-hidden='true' />
                 </Menu.Button>
             </div>
 

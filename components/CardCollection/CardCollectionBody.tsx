@@ -33,7 +33,7 @@ const CardCollectionBody = ({cards, totalCount, id}:{ id?: string, cards?: Image
                 )
             }
         >
-            {cards?.map((cardData: any, idx: number) => {
+            {cards?.map((cardData: ImageCardItem, idx: number) => {
                 return (<Card
                     id={id}
                     key={idx}

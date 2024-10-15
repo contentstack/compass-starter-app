@@ -4,9 +4,10 @@ import { Teaser as TeaserProps } from '@/types/components'
 import { Link } from '@/components'
 import { isDataInLiveEdit, resolveCta } from '@/utils'
 import { Image } from '../common/Image'
+import { Video } from '../common/Video'
 
 const Teaser: React.FC<TeaserProps> = (props: TeaserProps) => {
-    const { $, heading, content, cta, image, styles, id } = props
+    const { $, heading, content, cta, image, video, styles, id, isABEnabled } = props
 
     const ctaLink = resolveCta(cta)
     let position_css
@@ -54,15 +55,20 @@ const Teaser: React.FC<TeaserProps> = (props: TeaserProps) => {
     return (
         <div
             id={id}
-            className={'teaser-container relative bg-cover bg-no-repeat'}
+            className={'teaser-container relative bg-cover bg-no-repeat bg-[#424656]'}
         >
             <div className='absolute inset-0 overflow-hidden'>
-                {image?.[0]?.image?.url
+                {image?.[0]?.image?.url !== undefined
                     // eslint-disable-next-line jsx-a11y/alt-text
-                    && <Image
+                    ? <Image
                         {...image[0]}
                         addDataCslp={isDataInLiveEdit()}
                         className='h-full w-full object-cover object-center opacity-100'
+                    /> 
+                    : <Video
+                        {...video}
+                        addDataCslp={isDataInLiveEdit()}
+                        className='h-full w-full object-cover object-center opacity-100'    
                     />
                 }
             </div>
@@ -74,6 +80,7 @@ const Teaser: React.FC<TeaserProps> = (props: TeaserProps) => {
                     </p>}
                     {cta?.[0]?.text && ctaLink && <span {...$?.cta}><Link
                         url={ctaLink}
+                        isABEnabled={isABEnabled}
                         className={'relative max-w-full w-max btnPrimary py-3'}
                     >
                         {cta[0].text}
