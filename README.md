@@ -28,11 +28,26 @@ You can start editing the page by modifying `app/[locale]/page.tsx`. The page au
 
 [Compass Starter Stack Content Repo](https://github.com/contentstack/compass-starter-stack)
 
-## Tutorial
 
-We have created an in-depth tutorial on how you can create a starter website using the Contentstack's Node.js SDK and fetch its content using Contentstack.
+To import this content to your stack, perform the following steps:
 
-[Build a Compass Starter Website with NextJS and Contentstack](https://www.contentstack.com/docs/developers/sample-apps/)
+1. Install the CLI by running the following command in your terminal:
+
+	```npm i -g @contentstack/cli@1.28.1``` 
+
+2. By default, CLI uses the North America region. To use the Europe region, run this command in your terminal:
+
+	```csdx config:set:region EU```
+
+3. Next, log in to your Contentstack account via CLI:
+
+	```csdx auth:login```
+
+4. Create Compass Starter stack using CLI bootstrap command 
+
+    ```csdx cm:bootstrap --app-name compass-app --project-dir <project-dir> --org <org-uid> -n <stack-name>```
+
+Refer to the [Bootstrap command documentation](https://www.contentstack.com/docs/developers/cli/bootstrap-starter-apps) to learn more.
 
 ## Documentation
 
