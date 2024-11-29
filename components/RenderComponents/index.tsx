@@ -2,7 +2,7 @@ import { CardCollection, FeaturedArticles, Teaser, Text, TextAndImage } from '@/
 import { Page } from '@/types'
 import { pageBlocks } from '@/types/pages'
 import { isDataInLiveEdit } from '@/utils'
-
+import { VB_EmptyBlockParentClass } from '@contentstack/live-preview-utils'
 
 function RenderComponents ({ components, featured_articles, $, isABEnabled = false }: Page.pageRenderProps) {
 
@@ -59,11 +59,11 @@ function RenderComponents ({ components, featured_articles, $, isABEnabled = fal
     return (
         <div>
             <div {...((isDataInLiveEdit() && $?.components) || {})} //Parent wrapper
-                className={components?.length ? undefined : 'visual-builder__empty-block-parent max-height mt-32'}
+                className={components?.length ? undefined : `${VB_EmptyBlockParentClass} max-height mt-32`}
             >
                 {components?.map((component, key: number) => <div
                     key={`component-${key}`} id={`component-${key}`}
-                    {...(isDataInLiveEdit() && $?.['components__' + key])}
+                    {...(isDataInLiveEdit() && $?.[`components__${key}`])}
                 >
                     {
                         componentMapper(component, key)

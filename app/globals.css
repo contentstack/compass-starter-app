@@ -135,10 +135,10 @@ body {
   --removed-item-color: rgba(255, 0, 0);
 }
 
-picture .cs-compare__void--added, img.cs-compare__void--added {
+picture .cs-compare__void--added, img.cs-compare__void--added, video.cs-compare__void--added {
   border: 3px solid var(--added-item-color);
 }
 
-picture .cs-compare__void--removed, img.cs-compare__void--removed {
+picture .cs-compare__void--removed, img.cs-compare__void--removed, video.cs-compare__void--removed {
   border: 3px solid var(--removed-item-color);
 }

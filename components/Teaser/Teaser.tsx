@@ -53,7 +53,7 @@ const Teaser: React.FC<TeaserProps> = (props: TeaserProps) => {
     return (
         <div
             id={id}
-            className={'teaser-container relative bg-cover bg-no-repeat'}
+            className={'teaser-container relative bg-cover bg-no-repeat mb-24'}
         >
             <div className='absolute inset-0 overflow-hidden'>
                 {!image?.[0]?.image?.url && video?.video?.url 

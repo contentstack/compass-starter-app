@@ -1,7 +1,7 @@
 'use client'
 /* eslint-disable @next/next/no-img-element */
 import { Fragment, useEffect, useState } from 'react'
-import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react'
+import { Dialog, DialogPanel, Disclosure, Popover, PopoverBackdrop, PopoverButton, PopoverGroup, PopoverPanel, Transition } from '@headlessui/react'
 import {
     Bars3Icon,
     ChevronRightIcon,
@@ -135,10 +135,10 @@ function Header (props: App.Header) {
                 </div>
 
                 {/* DESKTOP MENU */}
-                <Popover.Group className='hidden lg:flex lg:gap-x-12'>
+                <PopoverGroup className='hidden lg:flex lg:gap-x-12'>
                     {items?.map((item, itemInd) => (
                         item?.mega_menu?.length ? <Popover key={item.text} data-id={`navItem-${itemInd}`} className='flex'>
-                            <Popover.Button
+                            <PopoverButton
                                 className='flex items-center gap-x-1 text-m font-semibold leading-6 text-gray-900 outline-none'
                             >
                                 <span
@@ -146,8 +146,8 @@ function Header (props: App.Header) {
                                 >
                                     {item.text}<ChevronDownIcon className='h-5 w-5 flex-none text-gray-900  ui-open:transform ui-open:rotate-180' aria-hidden='true' />
                                 </span>
-                            </Popover.Button>
-
+                            </PopoverButton>
+                            <PopoverBackdrop className='fixed inset-0 bg-transparent -z-20' />
                             <Transition
                                 as={Fragment}
                                 enter='transition ease-out duration-200'
@@ -157,7 +157,7 @@ function Header (props: App.Header) {
                                 leaveFrom='opacity-100 translate-y-0'
                                 leaveTo='opacity-0 -translate-y-1'
                             >
-                                <Popover.Panel
+                                <PopoverPanel
                                     className='absolute inset-x-0 top-0 -z-10 bg-white pt-14 shadow-lg ring-1 ring-gray-900/5 opacity-100 translate-y-0'
                                 >
                                     {item?.mega_menu?.[0]?.sections?.[0]?.links?.length && <div className='px-8'>
@@ -201,7 +201,7 @@ function Header (props: App.Header) {
                                         </Carousel>
                                     </div>}
                                     {item?.mega_menu?.[0]?.cta_group?.[0] && CTAGroup(item.mega_menu[0].cta_group[0])}
-                                </Popover.Panel>
+                                </PopoverPanel>
                             </Transition>
                         </Popover> : <>
                             {item?.link?.[0]?.url && <span {...item?.$?.link} className='flex items-center gap-x-1 text-m font-semibold leading-6 text-gray-900'><Link
@@ -215,13 +215,13 @@ function Header (props: App.Header) {
                     <LanguageSelector
                         locales={locales}
                     />
-                </Popover.Group>
+                </PopoverGroup>
             </nav>
 
             {/* MOBILE MENU */}
             <Dialog as='div' className='lg:hidden' open={mobileMenuOpen} onClose={setMobileMenuOpen}>
                 <div className='fixed inset-0 z-50' />
-                <Dialog.Panel className='fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10'>
+                <DialogPanel className='fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10'>
                     <div className='flex items-center justify-between'>
                         <div className='flex lg:flex-1'>
                             {logo?.url && <Link url='/' className='-m-1.5 ml-1.5 p-1.5'>
@@ -344,7 +344,7 @@ function Header (props: App.Header) {
                             </div>
                         </div>
                     </div>
-                </Dialog.Panel>
+                </DialogPanel>
             </Dialog>
         </header>
     )

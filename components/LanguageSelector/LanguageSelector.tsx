@@ -2,7 +2,7 @@
 
 import { Fragment, FunctionComponent, useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
-import { Menu, Transition } from '@headlessui/react'
+import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import _ from 'lodash'
 
@@ -41,7 +41,7 @@ const LanguageSelector: FunctionComponent<App.LangaugeSelector> = (props: App.La
             const flagCode = getFlagCode(locale?.code)
 
             return (
-                <Menu.Item
+                <MenuItem
                 >
                     <a
                         className={classNames(
@@ -56,7 +56,7 @@ const LanguageSelector: FunctionComponent<App.LangaugeSelector> = (props: App.La
                             {locale?.name}
                         </span>
                     </a>
-                </Menu.Item>
+                </MenuItem>
             )
 
         })
@@ -77,12 +77,12 @@ const LanguageSelector: FunctionComponent<App.LangaugeSelector> = (props: App.La
             className='relative inline-block text-left'
         >
             <div>
-                <Menu.Button 
+                <MenuButton
                     className={`inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold text-gray-900 hover:bg-gray-50 border border-transparent hover:border-gray-300 ${(!Opac) ? 'bg-opacity-100' : 'bg-opacity-20'}`}
                 >
                     <span className={`fi fi-${(currentLocale === 'en') ? 'us' : currentLocale} mt-1`}></span>
                     <ChevronDownIcon className='h-5 w-5 flex-none text-gray-900  ui-open:transform ui-open:rotate-180' aria-hidden='true' />
-                </Menu.Button>
+                </MenuButton>
             </div>
 
             <Transition
@@ -94,11 +94,11 @@ const LanguageSelector: FunctionComponent<App.LangaugeSelector> = (props: App.La
                 leaveFrom='transform opacity-100 scale-100'
                 leaveTo='transform opacity-0 scale-95'
             >
-                <Menu.Items className='absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
+                <MenuItems className='absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
                     {
                         renderDropdownOptions()
                     }
-                </Menu.Items>
+                </MenuItems>
             </Transition>
         </Menu>
     )
