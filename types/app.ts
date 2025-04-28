@@ -20,6 +20,7 @@ export interface Header extends Entry, Logo {
   scrolled?: boolean;
   items: NavItems[];
   locales?: localeItems
+  $?: LivePreviewTypeMapper<Header>
 }
 
 export interface Logo {
@@ -33,6 +34,7 @@ export interface LangaugeSelector {
 
 export interface Navigation extends Entry {
   items: NavItems[]
+  $?: LivePreviewTypeMapper<Navigation>
 }
 
 export interface NavItems {
@@ -52,6 +54,7 @@ export interface MegaMenuSection{
   $? : LivePreviewTypeMapper<MegaMenuSection>
   link:InternalLink[]
   links: SectionLink[]
+  [key: string]: LivePreviewTypeMapper<MegaMenuSection> | InternalLink[] | SectionLink[] | string | undefined;
 }
 
 export type CallToAction = {
@@ -89,6 +92,6 @@ export interface FooterLink {
   title?: string;
   text?: string
   link: InternalLink[]
-  external_link?: ExternalLink
+  external_link?: string
   [key: string]: LivePreviewTypeMapper<FooterLink> | InternalLink[] | ExternalLink | string | undefined;
 }

@@ -1,8 +1,7 @@
 import React from 'react'
-import { isString } from 'lodash'
-import { Image, Link } from '@/components'
+import { Image as ImageComponent, Link } from '@/components'
 import { ImageCardItem } from '@/types/components'
-import { classNames, resolveCardCta } from '@/utils'
+import { resolveCardCta } from '@/utils'
 
 /**
  * Card component that displays an image, title, content, and call-to-action
@@ -18,63 +17,60 @@ import { classNames, resolveCardCta } from '@/utils'
  * @returns {JSX.Element} Card component
  */
 const Card: React.FC<ImageCardItem> = (props: ImageCardItem) => {
-    const { $, image, image_alt_text, title, cta, content, count, id } = props
-
-    {/* eslint-disable-next-line jsx-a11y/alt-text */ }
-    const cardImage = <Image
-        image={image}
-        $={$}
-        image_alt_text={image_alt_text}
-        className={classNames(
-            count === 1 ? 'h-[24rem] w-auto'
-                : count === 2 ? 'h-[24rem] lg:h-64'
-                    : count === 3 ? 'h-48 lg:h-52'
-                        : count && count >= 4 ? 'h-48 lg:h-52'
-                            : '',
-            'w-full object-center object-fit object-cover hover:opacity-90 hover:cursor-pointer'
-        )}
-    /> 
+    const { $, image, image_alt_text, title, cta, content, id } = props
 
     return (
         <Link
             url={resolveCardCta(cta)}
         >
             <div
+                className='aspect-[7/11] w-full relative overflow-hidden shadow-[11.17px_11.17px_25.14px_2.79px_rgba(0,0,0,0.5)] flex flex-col justify-end px-[25px] py-[30px] group'
                 id={`card-${id}`}
-                className={'group h-full relative flex flex-col justify-between'}
             >
-                <div className='flex flex-col'>
-                    
-                    {cardImage}
 
-                    <div className='mt-6 text-xl text-black dark:text-white'>
-                        {title
-                            && <h4
-                                data-id='h4-text'
-                                className='font-bold card-title'
-                                {...$?.title}>
-                                {title}
-                            </h4>
-                        }
-                    </div>
-                    {content && <p
-                        data-id='paragraph-text'
-                        className='mt-4 p-0 text-base leading-5 text-black dark:text-white card-content whitespace-break-spaces'
-                        {...$?.content}
-                    >
-                        {content}
-                    </p>
-                    }
-                </div>
-                <div>
-                    {cta && !isString(cta) && cta?.text && <p className='mt-3 text-base font-semibold !text-purple'
-                        {...cta.$?.link}>
-                        <>
-                            {cta.text && cta.text !== '' ? <span {...cta?.$?.text}>{cta.text}</span> : <span {...cta?.$?.text}>CTA PLACEHOLDER</span>}
-                        </> &rarr;
-                    </p>
-                    }
-                </div>
+                <ImageComponent
+                    image={image}
+                    $={$}
+                    className='absolute inset-0 w-full h-full object-cover transition-transform duration-1000 scale-100 group-hover:scale-125'
+                    image_alt_text={image_alt_text || title}
+                />
+
+                <div className='absolute inset-0 bg-black/30 z-10' />
+
+                <div
+                    className='z-10 w-[42px] h-[6px] bg-white'
+                />
+
+                {
+                    title && (
+                        <span
+                            className='z-10 mt-[10px] text-white line-clamp-3 text-[30px] font-bold leading-[34px] drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] 
+                                uppercase underline decoration-transparent decoration-2 decoration-w-[10%] underline-offset-4 transition-all duration-1000 group-hover:decoration-white'
+                            {...$?.title}
+                            data-id='span-text'
+                        >
+                            {
+                                title
+                            }
+                        </span>
+                    )
+                }
+
+                {
+                    content && (
+                        <span
+                            className='z-10 text-white font-normal text-[1.563rem] leading-[25px] line-clamp-1 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] 
+                                underline decoration-transparent decoration-1 underline-offset-4 transition-all duration-1000 group-hover:decoration-white'
+                            {...$?.content}
+                            data-id='span-text'
+                        >
+                            {
+                                content
+                            }
+                        </span>
+                    )
+                }
+
             </div>
         </Link>
     )

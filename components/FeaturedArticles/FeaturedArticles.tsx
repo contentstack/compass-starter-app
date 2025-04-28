@@ -30,9 +30,9 @@ const FeaturedArticles: React.FC<FeaturedArticlesProps> = (props: FeaturedArticl
     return (
         <div
             id={id}
-            className={'pb-8 px-8 sm:pb-12'}
+            className={'mb-25 mx-[2.25rem] md:mx-[5.25rem] '}
         >
-            <div className='max-w-7xl mx-auto '>
+            <div className='mx-auto'>
                 <CardCollectionHeader
                     heading={heading}
                     sub_heading={sub_heading}

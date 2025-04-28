@@ -4,28 +4,57 @@ import { ArticleListingPage } from './pages'
 
 // ######################### COMPONENTS #########################
 
+// Hero Component Type
+export interface Hero {
+  id?: string
+  $?: LivePreviewTypeMapper<Hero>;
+  heading?: string;
+  content?: string;
+  cta?: CTA[];
+  image?: Image[];
+  video?: Video;
+  styles?: {
+    text_align?: string;
+  }
+  isABEnabled?: boolean;
+  _content_type_uid?: string;
+  summary?: string;
+  title?: string;
+  url?: string;
+  cover_image?: Image['image'];
+  locale?: string;
+  className?: string;
+}
+
 // Text (HTML RTE) Component
 export interface Text {
   id?: string | number;
   content?: string;
-  styles?: {
-    background_color?: string;
-  }
+  className?: string;
   $? : LivePreviewTypeMapper<Text>;
 }
 
-// TextAndImage Component Type
+// Text and Image Carousel Item Type
 export interface TextAndImage extends Image {
   id?: string;
   heading?: string;
   styles:{
-    image_position?: string;
     theme?:string;
   }
   cta: CTA[];
   content?: string;
   icon?:Image['image'];
   $?: LivePreviewTypeMapper<TextAndImage>;
+}
+
+// Text and Image Carousel Component Type
+export interface TextAndImageCarousel {
+  id?: string;
+  carousel_items: TextAndImage[] | [];
+  styles: {
+    image_position?: string;
+  }
+  $?: LivePreviewTypeMapper<TextAndImageCarousel>;
 }
 
 // Teaser Component Type
@@ -40,7 +69,6 @@ export interface Teaser {
   styles?: {
     text_align?: string;
   }
-  isABEnabled?: boolean;
 }
 
 // CardCollection Component Type <-----
@@ -60,6 +88,7 @@ export interface CardCollectionBody {
   cards?: ImageCardItem[] | [];
   count?: number;
   editKey?: string;
+  className?: string;
   $?: LivePreviewTypeMapper<CardCollectionBody>;
 }
 // CardCollection Component Type ENDS ---->
@@ -86,14 +115,6 @@ export interface ImageCardText {
   $?: LivePreviewTypeMapper<ImageCardText>
 }
 
-// ArticleCover Component Type
-export type ArticleCover = {
-  title?: string
-  summary?: string
-  cover_image?: Image['image']
-  $?: LivePreviewTypeMapper<ArticleCover>
-}
-
 // FeaturedArticles Component Type
 export interface FeaturedArticles {
   $?: LivePreviewTypeMapper<FeaturedArticles>;
@@ -101,6 +122,15 @@ export interface FeaturedArticles {
   articles?: ImageCardItem[] | [];
   heading?: string;
   sub_heading?: string;
+}
+
+// ArticleCover Component Type
+export type ArticleCover = {
+  title?: string;
+  cover_image?: Image['image'];
+  summary?: string;
+  _content_type_uid?: string;
+  $?: LivePreviewTypeMapper<ArticleCover>
 }
 
 // RelatedLink Component Type <----
@@ -162,6 +192,7 @@ export interface Image {
   image_position?: string;
   is_thumbnail?: boolean;
   $? : LivePreviewTypeMapper<Image>;
+  alt?: string;
 }
 
 // Video Component <----

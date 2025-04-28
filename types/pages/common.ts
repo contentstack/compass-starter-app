@@ -1,4 +1,4 @@
-import { ArticleCover, CardCollection, FeaturedArticles, Image, RelatedArticles, RelatedLinks, Teaser, Text, TextAndImage } from '../components'
+import { CardCollection, FeaturedArticles, Hero, Image, RelatedArticles, RelatedLinks, Teaser, Text, TextAndImageCarousel } from '../components'
 import { LivePreviewTypeMapper, localeItems, PageEntry } from '../common'
 
 export type SeoProps = {
@@ -20,7 +20,7 @@ export type SeoProps = {
 
 export interface pageBlocks {
   teaser?:Teaser
-  text_and_image?:TextAndImage
+  text_and_image_carousel?:TextAndImageCarousel
   text?: Text
   card_collection?:CardCollection
   image_preset?: Image
@@ -30,13 +30,16 @@ export interface pageBlocks {
 export type pageRenderProps = {
   components: pageBlocks[];
   isABEnabled?: boolean;
-  [key: string]: string | boolean | pageBlocks[] | FeaturedArticles | LivePreviewTypeMapper<pageRenderProps> | undefined;
+  [key: string]: string | boolean | pageBlocks[] | FeaturedArticles | Hero | LivePreviewTypeMapper<pageRenderProps> | undefined;
   $?: LivePreviewTypeMapper<pageRenderProps>;
   featured_articles?: FeaturedArticles;
+  hero?: Hero;
 } 
 
 // Article Type <-----
-export interface Article extends PageEntry, ArticleCover {
+export interface Article extends PageEntry {
+  summary?:string
+  cover_image?:Image['image']
   content?:string
   show_related_articles?: boolean
   show_related_links?: boolean

@@ -1,20 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 
 body {
-  @apply bg-white dark:bg-black !font-montserrat
+  font-family: 'Roboto Condensed';
 }
-
 .main-layout {
   min-height: 90vh;
 }
 
-@media (min-width:640px)  {
+@media (min-width:640px) {
 
-  .card-styled:nth-child(2n-2){
+  .card-styled:nth-child(2n-2) {
     position: relative;
     top: 94px;
   }
@@ -25,76 +23,122 @@ body {
 }
 
 @layer base {
-  h1, h2, h3, h4, h5, h6 {
-      @apply text-black dark:text-white font-montserrat font-bold text-black
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-black dark:text-white font-bold text-black uppercase font-bold;
   }
+
   h1 {
-    @apply text-[52px] leading-[54px]
+    @apply font-bold text-7xl tracking-normal;
   }
+
   h2 {
-    @apply text-[44px] leading-[45px]
+    @apply font-bold text-6xl tracking-normal;
   }
+
   h3 {
-    @apply text-[24px] leading-[26px]
+    @apply font-bold text-[50px] leading-[56px] tracking-normal;
   }
+
+  h4 {
+    @apply font-bold text-4xl tracking-normal;
+  }
+
+  h5 {
+    @apply font-bold text-[41.93px] leading-[47.52px] tracking-normal;
+  }
+
+  h6 {
+    @apply font-bold text-3xl tracking-normal;
+  }
+
   p {
-    @apply font-normal text-black dark:text-white !leading-6 font-montserrat
+    @apply font-normal text-md tracking-normal;
   }
-  span {
-    @apply !font-montserrat
-  }
-  button {
-    font-family: Montserrat
-  }
+
 }
 
 @layer components {
-  .container {
-    @apply relative max-w-7xl mx-auto;
+  .btn-primary {
+    @apply bg-transparent text-stone dark:text-white text-md-extra-wide font-medium cursor-pointer px-[1.875rem] uppercase flex items-center justify-center border border-stone dark:border-white rounded-[2.5rem] w-auto min-w-[11.75rem] h-[2.813rem] hover:bg-[#ffffff4D] hover:underline;
   }
-  .btnPrimary {
-    @apply bg-[#424656] hover:bg-[#A1AACE] font-bold text-white py-2 px-4 border hover:border-[#A1AACE] rounded;
-  }
-  .btnSecondary {
-    @apply bg-[#A1AACE] hover:bg-transparent font-bold text-white hover:text-[#424656] py-2 px-4 border-2 hover:border-[#424656] rounded;
-  }
-  .btnTertiary {
-    @apply block w-full rounded-md border border-transparent bg-black !text-white text-base font-semibold text-gray-100 hover:opacity-80
-  }
-  .text h1 {
-    @apply xl:mt-0 mt-4 text-4xl font-bold tracking-tight text-gray-900 sm:mt-0 sm:text-6xl dark:text-white
-  }
-  .text h2 {
-    @apply text-[44px] font-bold dark:text-white py-3
-  }
-  .text h3 {
-    @apply font-bold text-2xl leading-[26px] text-black dark:text-white py-4
-  }
-  .text h5 {
-    @apply font-bold text-purple text-lg leading-7
-  }  
-  .text h6{
-    @apply text-lg text-[#5B6B86] font-normal leading-7 dark:text-white py-2
-  }
-  .text ul { @apply list-disc py-1 px-6 }
 
-  .text ol { @apply list-decimal py-1 px-6 }
+  .text h1 {
+    @apply xl:mt-0 mt-4 text-7xl font-bold tracking-normal sm:mt-0 sm:text-6xl dark:text-white text-stone
+  }
+
+  .text h2 {
+    @apply text-4xl font-bold dark:text-white pt-[2.23rem] tracking-normal text-stone md:text-6xl
+  }
+
+  .text h2 strong {
+    @apply font-bold p-0
+  }
+
+  .text h3 {
+    @apply font-bold text-2xl text-stone dark:text-white py-4 tracking-normal
+  }
+
+  .text h5 {
+    @apply font-bold text-stone text-lg dark:text-white tracking-normal
+  }
+
+  .text h6 {
+    @apply text-lg text-stone font-normal dark:text-white py-2 tracking-normal
+  }
+
+  .text ul {
+    @apply list-disc pt-7.5 px-6 dark:text-white tracking-normal pb-25
+  }
+
+  .text ol {
+    @apply list-decimal pt-7.5 px-6 dark:text-white tracking-normal pb-25
+  }
 
   .text li {
-    @apply text-lg text-[16px] text-black/80 dark:text-white leading-7 py-1 font-light
+    @apply text-base md:text-md text-stone dark:text-white font-normal tracking-normal
   }
 
   .text li strong {
     @apply font-bold
   }
 
-  .text p { @apply py-1 font-normal leading-6 text-black text-base}
+  .text p {
+    @apply text-base md:text-md font-normal text-stone tracking-normal dark:text-white pt-7.5;
 
-  p { @apply py-1 font-normal leading-6 text-black }
+    &:empty {
+      display: none;
+    }
 
-  .text a { @apply text-[16px] text-purple hover:underline font-semibold}
+    &:not(:last-child):not(:has(+ ul)):not(:has(+ ol)):not(:has(+ p)) {
+      @apply pb-25;
+    }
+  }
 
-  .text img { @apply w-full my-8 mx-auto}
+  .text p strong {
+    @apply text-md md:text-xl font-medium
+  }
+
+  .text > *:last-child {
+    @apply pb-0;
+  }
+
+  p {
+    @apply py-1 font-normal leading-6 text-black dark:text-white tracking-normal
+  }
+
+  .text a {
+    @apply text-[16px] text-purple hover:underline font-semibold tracking-normal
+  }
+
+  .text img {
+    @apply w-full my-8 mx-auto
+  }
 
   .card-title {
     display: -webkit-box;
@@ -120,13 +164,22 @@ body {
     overflow: hidden;
   }
 
-
-  .built-by p {
-    @apply text-gray-700 font-montserrat !font-bold;
+  .taxonomies-label {
+    @apply font-inter p-[0.875rem] flex items-center gap-[0.625rem] rounded-[0.25rem] border border-[#CDD8E8] bg-[#F0F3F7] hover:border-[#7C4DFF] hover:bg-[#7C4DFF33] hover:underline hover:text-purple text-[#8992AE] text-[1.125rem] leading-[1.375rem] font-medium tracking-[0.045rem] uppercase;
   }
 
-  .built-by p > a {
-    @apply hover:underline text-purple outline-none ;
+  .footer {
+    @apply font-inter;
+  }
+  .copyright-info p {
+    @apply font-inter text-sm;
+  }
+  .footer-declaimer p {
+    @apply max-w-fit font-inter text-xs leading-6;
+  }
+
+  .footer-declaimer p > a {
+    @apply hover:underline text-purple outline-none;
   }
 }
 
@@ -135,10 +188,55 @@ body {
   --removed-item-color: rgba(255, 0, 0);
 }
 
-picture .cs-compare__void--added, img.cs-compare__void--added, video.cs-compare__void--added {
+picture .cs-compare__void--added,
+img.cs-compare__void--added,
+video.cs-compare__void--added {
   border: 3px solid var(--added-item-color);
 }
 
-picture .cs-compare__void--removed, img.cs-compare__void--removed, video.cs-compare__void--removed {
+picture .cs-compare__void--removed,
+img.cs-compare__void--removed,
+video.cs-compare__void--removed {
   border: 3px solid var(--removed-item-color);
+}
+
+h1::before,
+h2::before,
+h3::before,
+h4::before,
+h5::before,
+h6::before {
+  content: " ";
+  background-color: #253543;
+  color: #253543;
+  width: 0.543rem;
+  height: 6rem;
+  text-align: inherit;
+
+  transform: rotate(90deg) translateX(-5.5rem) translateY(-47%);
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+}
+
+.text-right
+.text-right::before,
+h1[style*="text-align: right"]::before,
+h2[style*="text-align: right"]::before,
+h3[style*="text-align: right"]::before,
+h4[style*="text-align: right"]::before,
+h5[style*="text-align: right"]::before,
+h6[style*="text-align: right"]::before {
+  right: 0rem;
+  transform: rotate(90deg) translateX(-7rem) translateY(50%);
+}
+
+.dark h1::before,
+.dark h2::before,
+.dark h3::before,
+.dark h4::before,
+.dark h5::before,
+.dark h6::before {
+  background-color: white;
 }

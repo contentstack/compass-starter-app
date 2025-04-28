@@ -33,29 +33,28 @@ const config = {
             yellow: colors.yellow,
             red: colors.red,
             purple: '#7C4DFF',
-            primary: {
-                normal: '#6c5ce7',
-                focus: '#5C51C1',
-                hover: '#4b459b'
-            },
-            secondary: {
-                normal: '#E85646',
-                focus: '#D23F2F',
-                hover: '#BB2817'
-            },
-            tertiary: {
-                normal: colors.gray[500],
-                focus: colors.gray[700],
-                hover: colors.gray[900]
-            },
+            primary: '#FFFFFF',
+            stone: '#253143',
             background: {
-                primary: '#ffffff',
-                secondary: '#F5F5F5'
+                primary: '#FFFFFF',
+                secondary: '#253143'
             }
         },
         screens: {
             'xs': '475px',
+            '3xl': '1920px',
             ...defaultTheme.screens
+        },
+        spacing: {
+            ...defaultTheme.spacing,
+            5: '1.25rem', // 20px
+            '7.5': '1.894rem', // 30.3px
+            '8.9': '2.227rem', // 35.63px
+            '10.48': '2.62rem', // 41.91px
+            '20.5': '5.0925rem', // 81.48px
+            21: '5.25rem', // 84px
+            25: '6.25rem', // 100px
+            '70.5': '17.6rem' // 281.6px
         },
         extend: {
             padding: {
@@ -67,13 +66,25 @@ const config = {
                     600: '#5B6B86',
                     900: '#253143'
                 }
+            },
+            fontSize: {
+                'xs': ['0.75rem', '0.75rem'], // 12px / 12px
+                'sm': ['0.875rem', '0.9625rem'], // 14px / 15.4px
+                'base': ['1rem', '1.5rem'], // 16px / 24px
+                'md': ['1.125rem', '1.5rem'], // 18px / 24px
+                'md-wide': ['1.125rem', '1.562rem'], // 18px / 25px
+                'md-extra-wide': ['1.125rem', '3.757rem'], // 18px / 60.11px
+                'lg': ['1.25rem', '5.252rem'], // 20px / 84.03px
+                'xl': ['1.5rem', '2rem'], // 24px / 32px
+                '2xl': ['1.571rem', '2.23rem'], // 25.14px / 35.69px
+                '2xl-wide': ['1.571rem', '5.248rem'], // 25.14px / 83.97px
+                '3xl': ['1.875rem', '2.125rem'], // 30px / 34px
+                '4xl': ['2.968rem', '3.142rem'], // 47.48px / 50.27px
+                '5xl': ['3.125rem', '4.54rem'], // 50px / 72.64px
+                '6xl': ['3.625rem', '3.75rem'], // 58px / 60px
+                '7xl': ['4rem', '4.375rem'], // 64px / 70px
+                'tiny': ['0.875rem', '0.875rem'] // 14px / 14px
             }
-
-            //   backgroundImage: {
-            //     'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-            //     'gradient-conic':
-            //       'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-            //   },
         },
         letterSpacing: {
             tighter: '-0.05em',
@@ -87,10 +98,7 @@ const config = {
             inter: ['Inter'],
             sans: ['Inter', 'sans-serif'],
             thin: ['Inter-Thin, Inter-thin, Inter, sans-serif'],
-            montserrat: ['Montserrat', 'sans-serif']
-        // semiBold: ['Inter-SemiBold,Inter, sans-serif'],
-        // bold: ['Inter-Bold,Inter-SemiBold,Inter, sans-serif'],
-        // extraBold: ['Inter-ExtraBold, Inter-Bold,Inter-SemiBold,Inter, sans-serif']
+            roboto_condensed: ['Roboto Condensed']
         }
     },
     plugins: [

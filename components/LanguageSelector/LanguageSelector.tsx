@@ -1,9 +1,8 @@
 'use client'
 
-import { Fragment, FunctionComponent, useEffect, useState } from 'react'
+import { FunctionComponent, useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import _ from 'lodash'
 
 import { App } from '@/types'
@@ -43,18 +42,18 @@ const LanguageSelector: FunctionComponent<App.LangaugeSelector> = (props: App.La
             return (
                 <MenuItem
                     key={`language-option-${index}`}
+                    as='div'
                 >
                     <a
                         className={classNames(
-                            (currentLocale === locale?.code) ? 'bg-gray-100 text-black rounded' : 'text-gray-700',
+                            (locale?.code === currentLocale || (currentLocale === 'us' && locale?.code === 'en')) ? 'bg-stone text-white rounded' : 'text-stone',
                             'group flex items-center px-4 py-2 text-sm font-medium gap-3 cursor-pointer'
                         )}
                         onClick={() => handleLanguageSwitch(locale)}
+                        aria-label={`${locale?.name}`}
                     >
-                        <span className={`fi fi-${flagCode}`} />
-                        <span className=''>
-                            {locale?.name}
-                        </span>
+                        <span className={`fi fi-${flagCode}`} aria-hidden='true' />
+                        <span>{locale?.name}</span>
                     </a>
                 </MenuItem>
             )
@@ -64,29 +63,25 @@ const LanguageSelector: FunctionComponent<App.LangaugeSelector> = (props: App.La
     }
 
     useEffect(() => {
-
         const locale = getFlagCode(router.locale)
-
         locale && setCurrentLocale(locale)
-
     }, [pathname])
 
     return (
         <Menu
             as='div'
-            className='relative inline-block text-left'
+            className='relative inline-block text-left items-center justify-center'
         >
-            <div>
-                <MenuButton
-                    className={`inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold text-gray-900 hover:bg-gray-50 border border-transparent hover:border-gray-300 ${(!Opac) ? 'bg-opacity-100' : 'bg-opacity-20'}`}
-                >
-                    <span className={`fi fi-${(currentLocale === 'en') ? 'us' : currentLocale} mt-1`}></span>
-                    <ChevronDownIcon className='h-5 w-5 flex-none text-gray-900  ui-open:transform ui-open:rotate-180' aria-hidden='true' />
-                </MenuButton>
-            </div>
+            <MenuButton
+                className={`inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2  ${(!Opac) ? 'bg-opacity-100' : 'bg-opacity-20'}`}
+                aria-label={`Current language is ${locales?.find(locale => getFlagCode(locale.code) === currentLocale)?.name || 'English'}. Click to change language`}
+                aria-haspopup='true'
+            >
+                <span className={`fi fi-${(currentLocale === 'en') ? 'us' : currentLocale} mt-1`} aria-hidden='true'></span>
+            </MenuButton>
 
             <Transition
-                as={Fragment}
+                as={'div'}
                 enter='transition ease-out duration-100'
                 enterFrom='transform opacity-0 scale-95'
                 enterTo='transform opacity-100 scale-100'
@@ -94,7 +89,12 @@ const LanguageSelector: FunctionComponent<App.LangaugeSelector> = (props: App.La
                 leaveFrom='transform opacity-100 scale-100'
                 leaveTo='transform opacity-0 scale-95'
             >
-                <MenuItems className='absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
+                <MenuItems
+                    className='absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'
+                    as='div'
+                    aria-orientation='vertical'
+                    aria-labelledby='language-menu'
+                >
                     {
                         renderDropdownOptions()
                     }

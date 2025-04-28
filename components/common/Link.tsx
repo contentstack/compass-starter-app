@@ -78,7 +78,7 @@ const LinkComponent: React.FC<LinkComponentType> = (props: LinkComponentType) =>
      */
     const LinkPlaceholder = () => {
         
-        elemattr.className = className + '!cursor-default hover:!no-underline hover:!border-transparent'
+        elemattr.className = className + ' !cursor-default hover:!no-underline hover:!border-transparent'
 
         return(
             <span onClick={onClickHandler} data-id='link-placeholder' {...elemattr}>

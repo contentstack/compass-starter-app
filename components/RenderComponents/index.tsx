@@ -1,5 +1,5 @@
-import { VB_EmptyBlockParentClass } from '@contentstack/live-preview-utils'
-import { CardCollection, FeaturedArticles, Teaser, Text, TextAndImage } from '@/components'
+import { CardCollection, FeaturedArticles, Hero, Teaser, Text, TextAndImageCarousel } from '@/components'
+import { VB_EmptyBlockParentClass } from '@/config'
 import { Page } from '@/types'
 import { pageBlocks } from '@/types/pages'
 import { isDataInLiveEdit } from '@/utils'
@@ -14,7 +14,7 @@ import { isDataInLiveEdit } from '@/utils'
  * @returns {JSX.Element} Rendered components
  */
 
-function RenderComponents ({ components, featured_articles, $, isABEnabled = false }: Page.pageRenderProps) {
+function RenderComponents ({ hero, components, featured_articles, $, isABEnabled = false}: Page.pageRenderProps) {
 
     const componentMapper = (component: pageBlocks, key: number) => {
 
@@ -25,17 +25,17 @@ function RenderComponents ({ components, featured_articles, $, isABEnabled = fal
 
                 <Teaser
                     id={`teaser-${key}`}
-                    {...component.teaser} isABEnabled={isABEnabled}
+                    {...component.teaser}
                 />
 
             )
 
-        case (!!component.text_and_image):
+        case (!!component.text_and_image_carousel):
             return (
 
-                <TextAndImage
-                    id={`text-image-${key}`}
-                    {...component.text_and_image}
+                <TextAndImageCarousel
+                    id={`text-image-carousel-${key}`}
+                    {...component.text_and_image_carousel}
                 />
 
             )
@@ -46,6 +46,7 @@ function RenderComponents ({ components, featured_articles, $, isABEnabled = fal
                 <CardCollection
                     id={`card-collection-${key}`}
                     {...component.card_collection}
+                    className='mx-[2.25rem] md:mx-[5.25rem] mb-25'
                 />
 
             )
@@ -67,8 +68,10 @@ function RenderComponents ({ components, featured_articles, $, isABEnabled = fal
     }
 
     return (
-        <div>
-            <div {...((isDataInLiveEdit() && $?.components) || {})} //Parent wrapper
+        <>
+            {hero && <Hero id='hero-banner' {...hero} isABEnabled={isABEnabled} {...$?.hero}/>}
+            <div 
+                {...((isDataInLiveEdit() && $?.components) || {})} //Parent wrapper
                 className={components?.length ? undefined : `${VB_EmptyBlockParentClass} max-height mt-32`}
             >
                 {components?.map((component, key: number) => <div
@@ -81,7 +84,7 @@ function RenderComponents ({ components, featured_articles, $, isABEnabled = fal
                 </div>)}
             </div>
             {featured_articles && <FeaturedArticles id='card-collection-FeaturedArticles' {...featured_articles} {...$?.featured_articles} />}
-        </div>
+        </>
     )
 }
 

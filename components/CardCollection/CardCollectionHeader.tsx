@@ -14,17 +14,18 @@ const CardCollectionHeader: React.FC<CardCollectionHeaderType> = (props: CardCol
     const { $, heading, sub_heading } = props
 
     return (
-        <div className='relative mx-auto flex max-w-4xl flex-col items-center text-center my-24'>
+        <div className='relative flex flex-col items-start lg:max-w-[calc((100vw)*0.45635)] mb-14 md:mb-25'>
             {heading && <h2
                 data-id='h2-text'
                 {...$?.heading}
-                className='text-[32px] font-montserrat font-semibold text-black dark:text-white leading-[48px]'
+                className={`text-3xl md:text-4xl lg:text-6xl md:leading-[3.75rem] font-bold inline-block text-stone pt-[2rem] ${sub_heading && 'mb-[1.894rem]'}`}
             >
                 {heading}
             </h2>}
             {sub_heading && <p
                 data-id='paragraph-text'
-                className='mt-7 uppercase text-sm font-semibold tracking-wider text-black/50 !leading-[20px]'
+                // className='text-sm font-semibold tracking-wider text-black/50 !leading-[20px]'
+                className='text-md md:text-xl p-0 text-stone font-medium whitespace-break-spaces'
                 {...$?.sub_heading}
             >
                 {sub_heading}
