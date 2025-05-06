@@ -20,7 +20,12 @@ const RelatedArticles:React.FC<RelatedArticlesComponent> = (props:RelatedArticle
     const { heading, sub_heading, $ } = {...related_articles}
     
     return(<div>
-        <CardCollection header={{heading, sub_heading, $}} cards={cards} id='related-articles-card-collection' />
+        <CardCollection 
+            header={{heading, sub_heading, $}} 
+            cards={cards} 
+            id='related-articles-card-collection' 
+            className='mx-[2.25rem] md:mx-[5.25rem]'    
+        />
     </div>
     )
 }

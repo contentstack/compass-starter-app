@@ -21,6 +21,7 @@ import { getEntries, getEntryByUrl } from '@/services'
  * 
  * @returns {JSX.Element}
  */
+
 export default function Article () {
     const { personalizationSDK, personalizeConfig } = usePersonalization()
     const [data, setData] = useState<Page.ArticlePage['entry'] | null>(null)
@@ -156,11 +157,11 @@ export default function Article () {
     return (
         data ? <>
             <PageWrapper {...data}>
-                <ArticleCover
-                    title={title}
+                <ArticleCover title={title}
                     summary={summary}
                     cover_image={cover_image}
                     $={$}
+                    _content_type_uid={'article'}
                 />
                 <Text
                     content={content}

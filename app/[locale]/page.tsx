@@ -6,7 +6,7 @@ import { NotFoundComponent, PageWrapper } from '@/components'
 import { onEntryChange } from '@/config'
 import useRouterHook from '@/hooks/useRouterHook'
 import { isDataInLiveEdit, setDataForChromeExtension } from '@/utils'
-import { featuredArticlesReferenceIncludes, imageCardsReferenceIncludes, teaserReferenceIncludes, textAndImageReferenceIncludes, textJSONRtePaths } from '@/services/helper'
+import { featuredArticlesReferenceIncludes, heroReferenceIncludes, imageCardsReferenceIncludes, teaserReferenceIncludes, textAndImageReferenceIncludes, textJSONRtePaths } from '@/services/helper'
 import { getEntryByUrl } from '@/services'
 import { usePersonalization } from '@/context'
 
@@ -35,6 +35,7 @@ export default function Home () {
     const fetchData = async () => {
         try {
             const refUids = [
+                ...heroReferenceIncludes,
                 ...textAndImageReferenceIncludes,
                 ...teaserReferenceIncludes,
                 ...imageCardsReferenceIncludes,
@@ -68,6 +69,7 @@ export default function Home () {
                 ? <PageWrapper {...data}>
                     {data?.components
                         ? <RenderComponents $={data?.$}
+                            hero={data?.hero && Array.isArray(data.hero) ? data.hero[0] : data.hero}
                             components={[
                                 // eslint-disable-next-line no-unsafe-optional-chaining
                                 ...data?.components

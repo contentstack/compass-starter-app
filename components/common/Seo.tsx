@@ -1,6 +1,7 @@
 import { Page } from '@/types'
 import { useLocaleContext } from '@/context'
 import packageInfo from '@/package.json'
+import { getAbsolutePageUrl } from '@/utils'
 
 /**
  * SEO Component for managing meta tags and document head elements
@@ -13,22 +14,25 @@ import packageInfo from '@/package.json'
  * @param {string} props.seo.canonical_url - Canonical URL for the page
  * @param {string} props.locale - Current locale code
  * @param {string} props.summary - Alternative description for meta tag
- * @param {string} props.url - Current page URL
+ * @param {string} props.url - url from the page's entry 
  * @param {Array} props.locales - Available locale options
  * @returns {JSX.Element} SEO component with meta tags
  */
 
 const SEO: React.FC<Page.SeoProps> = (props: Page.SeoProps) => {
 
-    const { seo: {no_follow, no_index, description, canonical_url} = {}, locale, summary, url, locales} = props
+    const { seo: {no_follow, no_index, description, canonical_url} = {}, locale, summary, url, locales} = props    
     const { currentLocale } = useLocaleContext()
+
+    // construct canonical url from current locale, and canonical_url / entry url
+    const canonicalUrl = getAbsolutePageUrl(`/${currentLocale}${canonical_url || url || ''}` )
 
     // Add version in meta tag for internal tracking and DOM visibility
     const { version } = packageInfo
 
     const alternateMetaLinks = locales?.map((lang: { code: string }) => ({
         hrefLang: lang?.code,
-        href: `/${lang?.code}${url}`
+        href: getAbsolutePageUrl(`/${lang?.code}${url}`)
     }))
 
     let robots
@@ -84,7 +88,7 @@ const SEO: React.FC<Page.SeoProps> = (props: Page.SeoProps) => {
             />)}
             <link
                 rel='canonical'
-                href={canonical_url ? canonical_url : url}
+                href={canonicalUrl}
             />
             <link
                 rel='icon'

@@ -1,10 +1,15 @@
 // ==============   REFERENCE PATHS   ==============
+export const heroReferenceIncludes = [
+    'hero',
+    'hero.cta.link'
+]
+
 export const teaserReferenceIncludes = [
     'components.teaser.cta.link'
 ]
 
 export const textAndImageReferenceIncludes = [
-    'components.text_and_image.cta.link'
+    'components.text_and_image_carousel.carousel_items.cta.link'
 ]
 
 export const imageCardsReferenceIncludes = [

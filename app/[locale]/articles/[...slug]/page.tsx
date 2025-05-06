@@ -56,6 +56,7 @@ export default function Article () {
                 && <CardCollection
                     cards={articlesList}
                     count={cards?.length}
+                    className='mb-25'
                 /> }
                 </>
         )
@@ -148,19 +149,19 @@ export default function Article () {
 
     return (<>
         {data && <PageWrapper {...data}>
-            {data?.title && <div className='pt-16 px-8 mb-16 bg-background-primary dark:bg-white text-center max-w-7xl mx-auto'>
-                <h1 className='mx-auto text-black' {...data?.$?.title}>{data?.title}</h1>
+            {data?.title && <div className='my-25 mx-[2.25rem] md:mx-[5.25rem] bg-background-primary dark:bg-white'>
+                <h1 className='text-stone max-w-max' {...data?.$?.title}>{data?.title}</h1>
             </div>}
-            {data?.components ? (
+            {(data?.components?.length > 0) ? (
                 <RenderComponents $={data?.$}
                     components={data?.components}
                 />
             ) : <></>}
         </PageWrapper>}
-        <div className='card-collection mt-16' id='pagination-scroll-anchor'>
+        <div className='card-collection mx-[2.25rem] md:mx-[5.25rem]' id='pagination-scroll-anchor'>
             <RenderCardCollection />
             { // Pagination component
-                cards?.length > 12 && <div className='py-8 px-8 xl:px-0 bg-background-primary dark:bg-transparent text-center max-w-7xl mx-auto'>
+                cards?.length > 12 && <div className='my-25 bg-background-primary dark:bg-transparent text-center'>
                     <Pagination
                         length={cards?.length}
                         dataPerPage={articlesPerPage}

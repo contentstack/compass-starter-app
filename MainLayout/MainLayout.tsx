@@ -4,10 +4,10 @@ import React, { useEffect, useState } from 'react'
 import { Footer, Header } from '@/components'
 import { App } from '@/types'
 
-import { onEntryChange } from '@/config'
 import useRouterHook from '@/hooks/useRouterHook'
 import { LocaleContext, usePersonalization } from '@/context'
 import { footerJsonRtePathIncludes, footerReferenceIncludes, getEntries, navigationReferenceIncludes } from '@/services'
+import { onEntryChange } from '@/config'
 
 const MainLayout: React.FC<App.MainLayout> = (
     props: React.PropsWithChildren<App.MainLayout>
@@ -43,7 +43,7 @@ const MainLayout: React.FC<App.MainLayout> = (
             console.error('Main Layout failed to load,\n', err)
         }
     }
-
+    
     useEffect(() => {
         onEntryChange(fetchAppConfig)
     }, [])

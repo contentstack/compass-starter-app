@@ -1,7 +1,4 @@
 import Contentstack from '@contentstack/delivery-sdk'
-import ContentstackLivePreview, { IStackSdk } from '@contentstack/live-preview-utils'
-import { LivePreviewMode } from '@/types/common'
-
 export const Stack = Contentstack.stack({
     apiKey: process.env.CONTENTSTACK_API_KEY as string,
     deliveryToken: process.env.CONTENTSTACK_DELIVERY_TOKEN as string,
@@ -15,25 +12,26 @@ export const Stack = Contentstack.stack({
     }
 })
 
-const getLocaleForURL = () => {
-    if (typeof window === 'undefined') return 'en'
-    return window.location.pathname?.split('/').filter(Boolean)[0]
-}
-
-ContentstackLivePreview.init({
-    enable: process.env.isLivePreviewEnabled === 'true' ? true : false,
-    mode: process.env.CONTENTSTACK_VISUAL_BUILDER_MODE as LivePreviewMode,
-    clientUrlParams: { host: process.env.CONTENTSTACK_APP_HOST },
-    stackDetails: {
-        apiKey: process.env.CONTENTSTACK_API_KEY,
-        environment: process.env.CONTENTSTACK_ENVIRONMENT,
-        branch: process.env.CONTENTSTACK_BRANCH,
-        locale: getLocaleForURL()
-    },
-    stackSdk: Stack.config as IStackSdk,
-    ssr: false
-})
-
-export const onEntryChange = ContentstackLivePreview.onEntryChange
 export const isLivePreviewEnabled = process.env.isLivePreviewEnabled === 'true'
 export const isEditButtonsEnabled = process.env.isEditButtonsEnabled === 'true'
+
+let onEntryChange: (callback: () => void) => void = (callback) => {
+    callback()
+}
+
+let VB_EmptyBlockParentClass: string = ''
+
+if (isLivePreviewEnabled) {
+    const loadPreviewSDK = async () => {
+        const { previewSdk } = await import('@/config/contentstack/previewSDk')
+        onEntryChange = previewSdk.onEntryChange
+        VB_EmptyBlockParentClass = previewSdk.VB_EmptyBlockParentClass
+
+    }
+
+    loadPreviewSDK().catch((error) => {
+        console.error('Failed to load the preview SDK:', error)
+    })
+}
+
+export { onEntryChange, VB_EmptyBlockParentClass }

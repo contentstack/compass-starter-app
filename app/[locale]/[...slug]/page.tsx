@@ -9,7 +9,7 @@ import { NotFoundComponent, PageWrapper } from '@/components'
 import { onEntryChange } from '@/config'
 import useRouterHook from '@/hooks/useRouterHook'
 import { setDataForChromeExtension } from '@/utils'
-import { imageCardsReferenceIncludes, teaserReferenceIncludes, textAndImageReferenceIncludes, textJSONRtePaths } from '@/services/helper'
+import { heroReferenceIncludes, imageCardsReferenceIncludes, teaserReferenceIncludes, textAndImageReferenceIncludes, textJSONRtePaths } from '@/services/helper'
 import { getEntryByUrl } from '@/services'
 import { usePersonalization } from '@/context'
 
@@ -50,6 +50,7 @@ export default function LandingPage () {
         const fetchData = async () => {
             try {
                 const refUids = [
+                    ...heroReferenceIncludes,
                     ...textAndImageReferenceIncludes,
                     ...teaserReferenceIncludes,
                     ...imageCardsReferenceIncludes
@@ -78,6 +79,7 @@ export default function LandingPage () {
             ? <PageWrapper {...data}>
                 {data?.components
                     ? <RenderComponents $={data?.$}
+                        hero={data?.hero && Array.isArray(data.hero) ? data.hero[0] : data.hero}
                         components={data?.components}
                         isABEnabled={isABTestEnabled}
                     /> : ''}

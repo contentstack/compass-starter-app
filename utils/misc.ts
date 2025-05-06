@@ -48,3 +48,9 @@ export const getPersonalizeAttribute = (audiences: Common.Audiences, criteria: s
 
     return Object.keys(retAttr).length > 0 ? retAttr : {}
 }
+
+// get localized data for cta text in Hero Component
+export const getLocalaizeData = (locale: string): string => {
+    const translatedContent: { [key: string]: string } = { 'en': 'Explore More', 'fr': 'Explorer davantage', 'de': 'Entdecken Sie mehr', 'es': 'Explora más' }
+    return translatedContent[locale]
+}

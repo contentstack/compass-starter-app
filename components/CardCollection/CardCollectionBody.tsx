@@ -1,4 +1,3 @@
-import { classNames } from '@/utils'
 import { CardCollectionBody as CardCollectionBodyProps , ImageCardItem } from '@/types/components'
 import { LivePreviewTypeMapper } from '@/types/common'
 import { Card } from '../Card'
@@ -18,34 +17,9 @@ const CardCollectionBody = ({cards, count, id, $, editKey}: CardCollectionBodyPr
     
     editKey = editKey || 'cards'
     
-    const gridConfigurator  = () => {
-
-        if(count && count > 12) return 'sm:grid-cols-2 lg:grid-cols-3'
-
-        switch(cards?.length) {
-        case 1:
-            return 'lg:grid-cols-1'
-
-        case 2:
-            return 'sm:grid-cols-2 lg:grid-cols-2'
-
-        case 3: 
-            return 'sm:grid-cols-2 lg:grid-cols-3'
-
-        default:
-            return 'sm:grid-cols-2 lg:grid-cols-3'
-        }
-
-    }
-
     return (
         cards && cards?.length > 0 ? <div
-            className={
-                classNames(
-                    gridConfigurator(),
-                    'grid grid-cols-1 gap-y-12 sm:gap-x-6 xl:gap-x-8'
-                )
-            }
+            className='grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 gap-y-12 sm:gap-x-6 xl:gap-x-8'
             {...$?.[editKey as keyof LivePreviewTypeMapper<CardCollectionBodyProps>] }
         >
             {cards?.map((cardData: ImageCardItem, idx: number) => {
