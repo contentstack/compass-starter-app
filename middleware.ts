@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { defaultLocale, localeCookieName } from '@/config/localization'
 import { createManagmentHeaders } from '@/config/contentstack/managementSDK'
 import { isLocale } from '@/utils/localization'
-import { Locale } from './types/common'
+import { Locale } from './types/common' 
 
 const fetchLocales = async () => {
     const requestOptions = createManagmentHeaders('GET')
@@ -22,13 +22,28 @@ export async function middleware (request: NextRequest) {
     
     const locales =  languagesCookie?.value ? JSON.parse(languagesCookie.value) : await fetchLocales()
 
+    let currentLocale = defaultLocale
     const pathnameHasLocale = pathname.split('/')?.some((p) => {
         return isLocale(p)
     })
 
+    const pathSegments = pathname.split('/')
+
+    if (pathSegments.length > 1 && isLocale(pathSegments[1])) {
+        currentLocale = pathSegments[1]
+    }
+
+
+    const requestHeaders = new Headers(request.headers)
+    requestHeaders.set('x-request-locale', currentLocale)
+
     if (pathnameHasLocale) {
         try {
-            const response = NextResponse.next()
+            const response = NextResponse.next({
+                request: {
+                    headers: requestHeaders
+                }
+            })
 
             if (!languagesCookie)  {
            
@@ -47,7 +62,11 @@ export async function middleware (request: NextRequest) {
         
         } catch(err) {
             console.error('Error while parsing locale : ', err)
-            NextResponse.next()
+            return NextResponse.next({
+                request: {
+                    headers: requestHeaders // Still pass the determined locale
+                }
+            })
         }
     }
 

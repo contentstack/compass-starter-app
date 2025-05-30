@@ -1,4 +1,11 @@
-import { CardCollection, FeaturedArticles, Hero, Teaser, Text, TextAndImageCarousel } from '@/components'
+import dynamic from 'next/dynamic'
+
+const CardCollection = dynamic(() => import('@/components/CardCollection').then(mod => mod.CardCollection))
+const FeaturedArticles = dynamic(() => import('@/components/FeaturedArticles').then(mod => mod.FeaturedArticles))
+const Hero = dynamic(() => import('@/components/Hero').then(mod => mod.Hero))
+const Teaser = dynamic(() => import('@/components/Teaser').then(mod => mod.Teaser))
+const Text = dynamic(() => import('@/components/Text').then(mod => mod.Text))
+const TextAndImageCarousel = dynamic(() => import('@/components/TextAndImageCarousel').then(mod => mod.TextAndImageCarousel))
 import { VB_EmptyBlockParentClass } from '@/config'
 import { Page } from '@/types'
 import { pageBlocks } from '@/types/pages'

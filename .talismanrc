@@ -1,4 +1,10 @@
 fileignoreconfig:
+- filename: package-lock.json
+  checksum: feeab6b3e3a58b1347b5d2e00cb66be4d5f6277e3386837043e733145287e3aa
+- filename: types/app.ts
+  checksum: a6a26902b0d3734888aea634893c96bcaec57af18ad6c531de5a85169e2a9f07
+- filename: types/common.ts
+  checksum: 906230e145a241b70f5ba96ba1cb6817ab00c1c4513c4a6be98a001f1706bff0
 - filename: .github/workflows/secrets-scan.yml
   ignore_detectors:
     - filecontent

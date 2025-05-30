@@ -24,8 +24,6 @@ import { LanguageSelector } from '../LanguageSelector'
  */
 function Header (props: App.Header): JSX.Element {
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [data, setData] = useState(props)
     const { logo, items, $ } = props
 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -45,7 +43,6 @@ function Header (props: App.Header): JSX.Element {
     const router = useRouterHook()
 
     useEffect(() => {
-        setData(props)
         if (isCookieExist(localeCookieName)) setLocales(getJsonCookie(localeCookieName))
     }, [props])
 

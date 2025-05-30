@@ -181,6 +181,16 @@ body {
   .footer-declaimer p > a {
     @apply hover:underline text-purple outline-none;
   }
+
+  .user-form-consent p {
+  @apply font-inter text-xs leading-[125%] tracking-normal font-light;
+
+  @apply md:text-sm md:leading-[150%] ;
+}
+
+.user-form-consent p > a {
+  @apply underline text-white outline-none;
+}
 }
 
 :root {

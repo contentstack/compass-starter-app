@@ -36,6 +36,13 @@ export const footerReferenceIncludes = [
     'footer_navigation.sections.links.link'
 ]
 
+export const userFormReferenceIncludes = [
+    'user_form'
+]
+export const userFormJsonRtePathIncludes = [
+    'user_form.form.user_consent_text'
+]
+
 
 // ==============  JSON RTE PATHS   ==============
 export const textJSONRtePaths = [
@@ -50,4 +57,3 @@ export const footerJsonRtePathIncludes = [
 export const articleJSONRtePathIncludes = [
     'content'
 ]
-

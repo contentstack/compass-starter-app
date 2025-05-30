@@ -57,5 +57,11 @@ Refer to the [Bootstrap command documentation](https://www.contentstack.com/docs
 - [Contentstack documentation](https://www.contentstack.com/docs/)
 - [Region support documentation](https://www.contentstack.com/docs/developers/selecting-region-in-contentstack-starter-apps)
 - [Contentstack Typescript SDK](https://www.contentstack.com/docs/developers/sdks/content-delivery-sdk/typescript/reference)
-- [Contentstack Personalize SDK](https://www.contentstack.com/docs/personalize)
+- [Contentstack Personalize SDK](https://www.contentstack.com/docs/personalize), [Personalize Overview](https://www.contentstack.com/docs/personalize#personalize-overview)
+- Visual Experince : 
+	- [Live Preview](https://www.contentstack.com/docs/content-managers/author-content/about-live-preview/)
+	- [Timeline](https://www.contentstack.com/docs/content-managers/timeline/)
+	- [Visual Builder](https://www.contentstack.com/docs/content-managers/visual-builder/)
+	- [Preview Sharing](https://www.contentstack.com/docs/content-managers/preview-sharing)
+
 - [Next.js](https://learnnextjs.com/)
