@@ -1,18 +1,18 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { Footer, Header } from '@/components'
+import { ConsentForm, Footer, Header } from '@/components'
 import { App } from '@/types'
 
 import useRouterHook from '@/hooks/useRouterHook'
 import { LocaleContext, usePersonalization } from '@/context'
-import { footerJsonRtePathIncludes, footerReferenceIncludes, getEntries, navigationReferenceIncludes } from '@/services'
+import { footerJsonRtePathIncludes, footerReferenceIncludes, getEntries, navigationReferenceIncludes, userFormJsonRtePathIncludes, userFormReferenceIncludes } from '@/services'
 import { onEntryChange } from '@/config'
 
 const MainLayout: React.FC<App.MainLayout> = (
     props: React.PropsWithChildren<App.MainLayout>
 ) => {  
-
+    
     const [webConfig, setWebConfig] = useState<App.WebConfig>()
     const { locale } = useRouterHook()
     const {personalizationSDK} = usePersonalization()
@@ -21,9 +21,11 @@ const MainLayout: React.FC<App.MainLayout> = (
         try {
             const refUids = [
                 ...navigationReferenceIncludes,
-                ...footerReferenceIncludes
+                ...footerReferenceIncludes,
+                ...userFormReferenceIncludes
             ]
             const jsonRtePaths = [
+                ...userFormJsonRtePathIncludes,
                 ...footerJsonRtePathIncludes
             ]
         
@@ -72,6 +74,14 @@ const MainLayout: React.FC<App.MainLayout> = (
                         logo={webConfig.logo}
                     />
                 }
+                {/* sticky cookie consent from */}
+                {webConfig?.consent_modal && <ConsentForm
+                    {...webConfig.consent_modal}
+                    $={{
+                        consent_modal: webConfig?.$?.consent_modal ,
+                        ...webConfig?.consent_modal?.$
+                    }}
+                />}
             </LocaleContext.Provider>}
         </>
     )

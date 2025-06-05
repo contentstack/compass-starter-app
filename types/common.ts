@@ -157,3 +157,55 @@ export type CTA = {
   external_url?: string;
   link?: InternalLink[];
 };
+
+export type UserFormModal = {
+    $?: LivePreviewTypeMapper<UserFormModal>;
+    icon?: Asset;
+    heading?: string;
+    form?: UserForm;
+    display_button?: boolean;
+    cookies_consent?: {
+        $?: LivePreviewTypeMapper<UserFormModal['cookies_consent']>;
+        icon?: Asset;
+        heading?: string;
+        message?: string;
+    }
+}
+
+export type UserForm = {
+    $?: LivePreviewTypeMapper<UserForm>;
+    fields?: FormField[];
+    user_consent_text?: string;
+    submit: {
+        $?: LivePreviewTypeMapper<UserForm['submit']>;
+        submit_button_text?: string;
+        submitting_button_text?: string;
+        submitted_heading?: string;
+        submitted_message?: string;
+    };
+}
+
+export type FormField = {
+    $?: LivePreviewTypeMapper<FormField>;
+    label?: string;
+    name?: string;
+    type?: string;
+    placeholder?: string;
+    required?: boolean;
+    pattern?: string;
+    message?: string;
+}
+
+export type ConsentFormProps = {
+    heading?: string
+    content?: string
+    consent_actions?: {
+        label: string
+        action: string
+        [key: string]: string
+    }[]
+    icon?: Asset
+    $?: LivePreviewTypeMapper<ConsentFormProps> & {
+        consent_modal?: {[key:string]: string}
+    }
+}
