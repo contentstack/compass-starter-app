@@ -45,7 +45,7 @@ const Card: React.FC<ImageCardItem> = (props: ImageCardItem) => {
                     title && (
                         <span
                             className='z-10 mt-[10px] text-white line-clamp-3 text-[30px] font-bold leading-[34px] drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] 
-                                uppercase underline decoration-transparent decoration-2 decoration-w-[10%] underline-offset-4 transition-all duration-1000 group-hover:decoration-white'
+                                uppercase group-hover:decoration-2 decoration-w-[10%] underline-offset-4 transition-all duration-1000 group-hover:underline group-hover:decoration-white'
                             {...$?.title}
                             data-id='span-text'
                         >
@@ -59,8 +59,7 @@ const Card: React.FC<ImageCardItem> = (props: ImageCardItem) => {
                 {
                     content && (
                         <span
-                            className='z-10 text-white font-normal text-[1.563rem] leading-[25px] line-clamp-1 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] 
-                                underline decoration-transparent decoration-1 underline-offset-4 transition-all duration-1000 group-hover:decoration-white'
+                            className='z-10 text-white font-normal text-[1.563rem] leading-[25px] line-clamp-1 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] transition-all duration-1000'
                             {...$?.content}
                             data-id='span-text'
                         >

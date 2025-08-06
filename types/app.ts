@@ -1,4 +1,4 @@
-import { Asset, ConsentFormProps, EmbedEntry, Entry, LivePreviewTypeMapper, localeItems} from './common'
+import { Asset, ConsentFormProps, EmbedEntry, Entry, LivePreviewTypeMapper, localeItems, UserFormModal} from './common'
 import { ExternalLink, InternalLink } from './common'
 
 // ######################### MAIN LAYOUT #########################
@@ -14,6 +14,7 @@ export type WebConfig =  Entry & Header & {
   footer_navigation: Footer[]; 
   main_navigation: Navigation[];
   consent_modal?: ConsentFormProps;
+  user_form?: UserFormModal[];
   $?: {[key: string]: { [key: string]: string }};
 }
 

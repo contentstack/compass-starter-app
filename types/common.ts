@@ -195,15 +195,16 @@ export type FormField = {
     pattern?: string;
     message?: string;
 }
+export type ConsentAction = {
+        label: string
+        action: string
+        $?: LivePreviewTypeMapper<ConsentAction>
+}
 
 export type ConsentFormProps = {
     heading?: string
     content?: string
-    consent_actions?: {
-        label: string
-        action: string
-        [key: string]: string
-    }[]
+    consent_actions?: ConsentAction[]
     icon?: Asset
     $?: LivePreviewTypeMapper<ConsentFormProps> & {
         consent_modal?: {[key:string]: string}

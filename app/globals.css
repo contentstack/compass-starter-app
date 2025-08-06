@@ -164,6 +164,14 @@ body {
     overflow: hidden;
   }
 
+  .text-clamp {
+    display: -webkit-box;
+    max-width: 100%;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
   .taxonomies-label {
     @apply font-inter p-[0.875rem] flex items-center gap-[0.625rem] rounded-[0.25rem] border border-[#CDD8E8] bg-[#F0F3F7] hover:border-[#7C4DFF] hover:bg-[#7C4DFF33] hover:underline hover:text-purple text-[#8992AE] text-[1.125rem] leading-[1.375rem] font-medium tracking-[0.045rem] uppercase;
   }

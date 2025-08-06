@@ -23,7 +23,7 @@ const Pagination: React.FC<PaginationProps> = ({ length, dataPerPage, currentPag
     const path = usePathname()
 
     const addPageNumberinURL = (page: string) => {
-        router.replace(`${path}?page=${page}`, { scroll: false })
+        window?.history?.replaceState(null, '', `${path}?page=${page}`)
     }
 
     useEffect(() => {
