@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { ConsentForm, Footer, Header } from '@/components'
+import { ConsentForm, Footer, Header, UserFormModal } from '@/components'
 import { App } from '@/types'
 
 import useRouterHook from '@/hooks/useRouterHook'
@@ -82,6 +82,8 @@ const MainLayout: React.FC<App.MainLayout> = (
                         ...webConfig?.consent_modal?.$
                     }}
                 />}
+                {/* user sign up from */}
+                {webConfig?.user_form?.[0] && <UserFormModal {...webConfig.user_form[0]} />}
             </LocaleContext.Provider>}
         </>
     )

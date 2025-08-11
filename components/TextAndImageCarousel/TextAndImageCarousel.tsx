@@ -43,7 +43,7 @@ export function TextAndImageCarousel (props: Component.TextAndImageCarousel) {
             className='text-and-image-carousel'
             {...$?.carousel_items}
         >
-            {currentItemData?.length > 0 && currentItemData.map((item, index: number) => {
+            {currentItemData?.length > 0 ? currentItemData.map((item, index: number) => {
                 const { heading, content, image, image_alt_text, cta, styles: { theme }, is_thumbnail } = item
 
                 return <div 
@@ -56,7 +56,7 @@ export function TextAndImageCarousel (props: Component.TextAndImageCarousel) {
                             `${image_position === 'right' ? 'sm:flex-row flex-col'
                                 : image_position === 'left' ? 'sm:flex-row-reverse flex-col'
                                     : 'xs:flex-row-reverse flex-col-reverse'}`,
-                            
+                    
                             'flex my-25',
                             'text-stone bg-white dark:text-white dark:bg-stone'
                         )}
@@ -86,7 +86,7 @@ export function TextAndImageCarousel (props: Component.TextAndImageCarousel) {
                         </div>
                     </div>
                 </div>
-            })}
+            }) : <div className='text-center text-gray-400 py-16'>No carousel items available. Click + to add one.</div>}
         </div>
     )
 }

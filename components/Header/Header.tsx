@@ -170,10 +170,10 @@ function Header (props: App.Header): JSX.Element {
                                                                     </h6>
                                                                 </>}
                                                                 {linkData?.link_text && <span
-                                                                    className='mt-[10.54px] btn-primary !min-w-[8.615625rem] w-[8.615625rem] !px-[2.620625rem] group-hover:underline'
+                                                                    className='mt-[10.54px] btn-primary !min-w-[8.615625rem] w-[8.615625rem] text-center !h-auto !leading-[1.5rem] py-[0.62rem] group-hover:underline'
                                                                     {...linkData?.$?.link}
                                                                 >
-                                                                    {linkData?.link_text && <span {...linkData?.$?.link_text}>{linkData?.link_text}</span>}
+                                                                    {linkData?.link_text && <span className='text-clamp' {...linkData?.$?.link_text}>{linkData?.link_text}</span>}
                                                                 </span>}
                                                             </div>
                                                         </a>
@@ -265,13 +265,18 @@ function Header (props: App.Header): JSX.Element {
                                                 onClick={(e: React.MouseEvent) => { currPanel !== item?.text ? handleMouseOver(e) : handleClose(e)}}
                                                 data-title={item?.text}
                                             >
-                                                <span className={`${currPanel === item?.text ? 'underline' : ''} block ml-6 mr-3 text-md font-medium font-inter leading-7 hover:bg-gray-50 hover:underline`}
-                                                    {...((item?.mega_menu?.[0]?.sections) ? '' : item?.$?.link)}>
-                                                    <Link
-                                                        url={item?.link}
-                                                    >
+                                                <span
+                                                    className={`${currPanel === item?.text ? 'underline' : ''} block ml-6 mr-3 text-md font-medium font-inter leading-7 hover:bg-gray-50 hover:underline`}
+                                                    {...((item?.mega_menu?.[0]?.sections) ? '' : item?.$?.link)}
+                                                    data-title={item?.text}
+                                                >
+                                                    {item?.link && item?.link.length > 0 ? <Link url={item?.link}>
                                                         <span {...((item?.mega_menu?.[0]?.sections) ? '' : item?.$?.text)}>{item.text}</span>
                                                     </Link>
+                                                        : item?.mega_menu?.[0]?.sections?.length as number > 0
+                                                            ? <span
+                                                                {...item?.$?.text}
+                                                            >{item.text}</span> : null}
                                                 </span>
                                                 {item && item?.mega_menu?.[0]?.sections && item?.mega_menu?.[0]?.sections?.length > 0 && <>
                                                     {currPanel === item?.text
@@ -296,7 +301,8 @@ function Header (props: App.Header): JSX.Element {
                                                         <div onClick={resetMobileNav}>
                                                             {sect?.title && <Link
                                                                 url={sect?.link}
-                                                                className='font-inter text-base flex items-start text-stone pt-2'>
+                                                                className='font-inter text-base flex items-start text-stone pt-2'
+                                                            >
                                                                 {sect.title}
                                                             </Link>}
                                                         </div>
