@@ -39,7 +39,7 @@
     "globals": "^15.9.0",
     "html-react-parser": "^5.1.12",
     "lodash": "^4.17.21",
-    "next": "^15.2.3",
+    "next": "^15.4.9",
     "nprogress": "^0.2.0",
     "postcss": "^8.4.41",
     "react": "^18",
