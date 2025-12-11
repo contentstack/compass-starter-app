@@ -35,7 +35,7 @@ const Card: React.FC<ImageCardItem> = (props: ImageCardItem) => {
                     image_alt_text={image_alt_text || title}
                 />
 
-                <div className='absolute inset-0 bg-black/30 z-10' />
+                {/* <div className='absolute inset-0 bg-black/30 z-10' /> */}
 
                 <div
                     className='z-10 w-[42px] h-[6px] bg-white'

@@ -76,7 +76,7 @@ function RenderComponents ({ hero, components, featured_articles, $, isABEnabled
 
     return (
         <>
-            {hero && <Hero id='hero-banner' {...hero} isABEnabled={isABEnabled} {...$?.hero}/>}
+            {hero && <div {...$?.hero}><Hero id='hero-banner' {...hero} isABEnabled={isABEnabled} {...$?.hero}/></div>}
             <div 
                 {...((isDataInLiveEdit() && $?.components) || {})} //Parent wrapper
                 className={components?.length ? undefined : `${VB_EmptyBlockParentClass} max-height mt-32`}

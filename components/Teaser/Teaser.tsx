@@ -44,7 +44,7 @@ const Teaser: React.FC<TeaserProps> = (props: TeaserProps) => {
             className={'teaser-container my-25 py-[5.2rem] h-full relative bg-cover bg-no-repeat bg-stone'}
         >
             <div className='absolute inset-0 overflow-hidden'>
-                {!image?.[0]?.image?.url && video?.video?.url 
+                {!image?.image?.url && video?.video?.url 
                     ? <Video
                         {...video}
                         addDataCslp={isDataInLiveEdit()}
@@ -52,8 +52,8 @@ const Teaser: React.FC<TeaserProps> = (props: TeaserProps) => {
                     />
                     // eslint-disable-next-line jsx-a11y/alt-text
                     : <Image
-                        {...image?.[0]}
-                        $={image?.[0]?.$}
+                        {...image}
+                        $={image?.$}
                         addDataCslp={isDataInLiveEdit()}
                         className='h-full w-full object-cover object-center opacity-100'
                     />}

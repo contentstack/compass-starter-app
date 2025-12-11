@@ -1,11 +1,21 @@
+'use client'
 import Link from 'next/link'
+import { SEO } from './Seo'
 
 /**
  * NotFoundComponent - A React component that displays a 404 error message on page
  * @returns {JSX.Element} A React component for the 404 error page
  */
 const NotFoundComponent = () => {
-    return (
+    return (<>
+        <SEO
+            seo={{ 
+                title: '404 - Page Not Found | Compass',
+                no_index: true,
+                no_follow: true,    
+                description: 'The page you are looking for could not be found. Return to our homepage or browse our content.'
+            }}
+        />
         <div 
             className='grid min-h-full place-items-center dark:!bg-black bg-white px-6 py-24 sm:py-28 lg:px-8'
             id='not-found-component' 
@@ -25,7 +35,8 @@ const NotFoundComponent = () => {
                 </div>
             </div>
         </div>
+    </>
     )
 }
 
-export {NotFoundComponent}
+export { NotFoundComponent }

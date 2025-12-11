@@ -64,7 +64,7 @@ export interface Teaser {
   heading?: string;
   content?: string;
   cta?: CTA[];
-  image?: Image[];
+  image?: Image;
   video?: Video;
   styles?: {
     text_align?: string;

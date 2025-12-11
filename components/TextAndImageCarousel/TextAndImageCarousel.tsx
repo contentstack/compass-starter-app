@@ -3,6 +3,7 @@ import { Component } from '@/types'
 import { Image } from '@/components'
 import { classNames } from '@/utils'
 import { LivePreviewTypeMapper } from '@/types/common'
+import { VB_EmptyBlockParentClass } from '@/config'
 import { Paginator, TextBlock } from './index'
 
 /**
@@ -40,10 +41,10 @@ export function TextAndImageCarousel (props: Component.TextAndImageCarousel) {
     return (
         <div 
             id={id}
-            className='text-and-image-carousel'
+            className={`text-and-image-carousel ${currentItemData?.length < 1 ? VB_EmptyBlockParentClass : ''} my-25`}
             {...$?.carousel_items}
         >
-            {currentItemData?.length > 0 ? currentItemData.map((item, index: number) => {
+            {currentItemData?.length > 0 && currentItemData.map((item, index: number) => {
                 const { heading, content, image, image_alt_text, cta, styles: { theme }, is_thumbnail } = item
 
                 return <div 
@@ -57,7 +58,7 @@ export function TextAndImageCarousel (props: Component.TextAndImageCarousel) {
                                 : image_position === 'left' ? 'sm:flex-row-reverse flex-col'
                                     : 'xs:flex-row-reverse flex-col-reverse'}`,
                     
-                            'flex my-25',
+                            'flex',
                             'text-stone bg-white dark:text-white dark:bg-stone'
                         )}
                     >
@@ -86,7 +87,7 @@ export function TextAndImageCarousel (props: Component.TextAndImageCarousel) {
                         </div>
                     </div>
                 </div>
-            }) : <div className='text-center text-gray-400 py-16'>No carousel items available. Click + to add one.</div>}
+            })}
         </div>
     )
 }
