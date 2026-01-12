@@ -19,8 +19,8 @@
     }
   },
   "dependencies": {
-    "@contentstack/delivery-sdk": "4.10.3",
-    "@contentstack/live-preview-utils": "4.1.2",
+    "@contentstack/delivery-sdk": "4.10.5",
+    "@contentstack/live-preview-utils": "4.2.0",
     "@contentstack/personalize-edge-sdk": "1.0.19",
     "@contentstack/utils": "1.4.1",
     "@headlessui/react": "2.1.2",
@@ -39,7 +39,7 @@
     "globals": "14.0.0",
     "html-react-parser": "5.2.5",
     "lodash": "^4.17.21",
-    "next": "15.2.6",
+    "next": "15.4.10",
     "nprogress": "^0.2.0",
     "postcss": "8.4.31",
     "react": "18.3.1",
