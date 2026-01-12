@@ -51,7 +51,7 @@ const SEO: React.FC<Page.SeoProps> = (props: Page.SeoProps) => {
             {props?.seo?.title ? <title>{props?.seo?.title}</title> : <title>{props?.title}</title>}
             <meta
                 name='application-name'
-                content='Universal Demo'
+                content='Compass Starter App'
             />
             <meta charSet='utf-8' />
             <meta httpEquiv='X-UA-Compatible' content='IE=edge' />

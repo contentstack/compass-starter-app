@@ -1,14 +1,10 @@
-[![compass-starter-app](/public/contentstack-logo.png)](https://www.contentstack.com/)
-
 # Compass Starter App
 
 About Contentstack: Contentstack is a headless CMS with an API-first approach that puts content at the centre. It is designed to simplify the process of publication by separating code from content.
 
 About this project: This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) used to build modern web applications.
 
-![compass-starter-app](/public/starter-app.png)
-
-##### Recommended Node version: v18.17.0 and App Supported till v22.11.0
+##### Recommended Node version: v18.17.0 and App Supported till v24.3.0
 
 ## Getting Started
 

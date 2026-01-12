@@ -25,7 +25,8 @@ const patchedConfig = fixupConfigRules([...compat.extends(
 const config = [
     {
         ignores: [
-            '.next/*'
+            '.next/*',
+            'next-env.d.ts'
         ]
     }, 
     ...patchedConfig,

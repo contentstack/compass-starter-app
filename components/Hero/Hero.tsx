@@ -73,7 +73,9 @@ const Hero: React.FC<HeroProps> = (props: HeroProps) => {
                     // eslint-disable-next-line jsx-a11y/alt-text
                     : <Image
                         {...bannerImage?.[0]}
-                        $={bannerImage?.[0]?.$}
+                        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                        // @ts-ignore
+                        $={bannerImage?.[0]?.$ || $}
                         addDataCslp={isDataInLiveEdit()}
                         className='h-full w-full object-cover object-center opacity-100'
                     />}
